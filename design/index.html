@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경도 앱 디자인 프로토타입</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .screen-card {
+            background: #FFFFFF;
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .screen-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .screen-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+        
+        .screen-description {
+            font-size: 14px;
+            color: #6B7280;
+            margin-bottom: 16px;
+        }
+        
+        .screen-preview {
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        
+        .screen-preview iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        
+        .view-button {
+            display: block;
+            width: 100%;
+            background: #2563EB;
+            color: #FFFFFF;
+            text-decoration: none;
+            text-align: center;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background 0.2s ease;
+        }
+        
+        .view-button:hover {
+            background: #1D4ED8;
+        }
+        
+        .info-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .info-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 12px;
+        }
+        
+        .info-text {
+            font-size: 14px;
+            color: #6B7280;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .feature-item {
+            background: #F9FAFB;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #111827;
+        }
+        
+        .footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">🚔 경도 앱 디자인 프로토타입</div>
+            <div class="subtitle">HTML/CSS로 제작된 인터랙티브 화면 프로토타입</div>
+        </div>
+        
+        <div class="info-box">
+            <div class="info-title">📋 프로토타입 정보</div>
+            <div class="info-text">✅ 3개 주요 화면 완성 (방 설정, 대기실, 게임 화면)</div>
+            <div class="info-text">✅ 실제 앱과 동일한 크기 (iPhone 375x812px)</div>
+            <div class="info-text">✅ 실제 색상 및 스타일 적용 (경찰: #2563EB, 도둑: #DC2626)</div>
+            <div class="info-text">✅ 브라우저에서 바로 확인 가능</div>
+            <div class="info-text">💡 각 화면을 클릭하면 전체 화면으로 볼 수 있습니다</div>
+        </div>
+        
+        <div class="screens-grid">
+            <div class="screen-card">
+                <div class="screen-title">1️⃣ 방 설정 화면</div>
+                <div class="screen-description">
+                    게임 시간, 라운드, 팀 배정 방법, 검거 확인 방법, 맵 설정 등 모든 옵션 포함
+                </div>
+                <div class="screen-preview">
+                    <iframe src="screen1_room_settings.html"></iframe>
+                </div>
+                <a href="screen1_room_settings.html" target="_blank" class="view-button">
+                    전체 화면으로 보기 →
+                </a>
+            </div>
+            
+            <div class="screen-card">
+                <div class="screen-title">2️⃣ 대기실 화면</div>
+                <div class="screen-description">
+                    경찰팀 vs 도둑팀 구분, 플레이어 카드, 드래그 앤 드롭 표시, 게임 시작 버튼
+                </div>
+                <div class="screen-preview">
+                    <iframe src="screen2_waiting_room.html"></iframe>
+                </div>
+                <a href="screen2_waiting_room.html" target="_blank" class="view-button">
+                    전체 화면으로 보기 →
+                </a>
+            </div>
+            
+            <div class="screen-card">
+                <div class="screen-title">3️⃣ 게임 화면 (경찰 모드)</div>
+                <div class="screen-description">
+                    실시간 지도, 플레이어 마커, 경찰 전용 실시간 상황 박스, 가까운 도둑 추적
+                </div>
+                <div class="screen-preview">
+                    <iframe src="screen3_game_police.html"></iframe>
+                </div>
+                <a href="screen3_game_police.html" target="_blank" class="view-button">
+                    전체 화면으로 보기 →
+                </a>
+            </div>
+        </div>
+        
+        <div class="info-box">
+            <div class="info-title">🎨 구현된 주요 기능</div>
+            <div class="features-list">
+                <div class="feature-item">✅ 라디오 버튼 그룹 (팀 배정, 검거 방법)</div>
+                <div class="feature-item">✅ 슬라이더 (구역 반경 조절)</div>
+                <div class="feature-item">✅ 체크박스 (실격 처리)</div>
+                <div class="feature-item">✅ 입력 필드 (방 이름, 메모 등)</div>
+                <div class="feature-item">✅ 드래그 앤 드롭 표시 (팀 이동)</div>
+                <div class="feature-item">✅ 플레이어 카드 (아바타, 이름, 배지)</div>
+                <div class="feature-item">✅ 지도 (간단한 마커 표시)</div>
+                <div class="feature-item">✅ 실시간 상황 박스 (경찰 전용)</div>
+                <div class="feature-item">✅ 가까운 도둑 카드 (추적 버튼)</div>
+                <div class="feature-item">✅ 큰 버튼 (애니메이션 효과)</div>
+            </div>
+        </div>
+        
+        <div class="info-box">
+            <div class="info-title">📁 파일 위치</div>
+            <div class="info-text">모든 파일은 <code>/Users/jm/Documents/policenthief/design/</code>에 저장되어 있습니다</div>
+            <div class="info-text">• screen1_room_settings.html - 방 설정 화면</div>
+            <div class="info-text">• screen2_waiting_room.html - 대기실 화면</div>
+            <div class="info-text">• screen3_game_police.html - 게임 화면 (경찰)</div>
+            <div class="info-text">• index.html - 이 페이지</div>
+        </div>
+        
+        <div class="footer">
+            Made with ❤️ by j-mac 🤖<br>
+            2026-02-15
+        </div>
+    </div>
+</body>
+</html>

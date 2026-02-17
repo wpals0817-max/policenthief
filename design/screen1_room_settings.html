@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경도 앱 - 방 설정 화면</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #F9FAFB;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .phone {
+            width: 375px;
+            height: 812px;
+            background: #F9FAFB;
+            border-radius: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: #FFFFFF;
+            padding: 16px 20px;
+            border-bottom: 1px solid #E5E7EB;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-back {
+            color: #111827;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+        }
+        
+        .header-done {
+            color: #2563EB;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .content {
+            padding: 20px;
+            overflow-y: auto;
+            height: calc(812px - 60px);
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 12px;
+            margin-top: 24px;
+        }
+        
+        .section-title:first-child {
+            margin-top: 0;
+        }
+        
+        .input-field {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .input-label {
+            font-size: 14px;
+            color: #111827;
+        }
+        
+        .input-value {
+            font-size: 14px;
+            color: #6B7280;
+        }
+        
+        .radio-group {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .radio-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+        }
+        
+        .radio-circle {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #6B7280;
+            border-radius: 50%;
+            margin-right: 12px;
+            position: relative;
+        }
+        
+        .radio-circle.selected {
+            border-color: #2563EB;
+        }
+        
+        .radio-circle.selected::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #2563EB;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .radio-label {
+            font-size: 14px;
+            color: #111827;
+        }
+        
+        .slider-container {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .slider-label {
+            font-size: 14px;
+            color: #111827;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .slider-track {
+            width: 100%;
+            height: 4px;
+            background: #E5E7EB;
+            border-radius: 2px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+        
+        .slider-progress {
+            width: 20%;
+            height: 4px;
+            background: #2563EB;
+            border-radius: 2px;
+        }
+        
+        .slider-handle {
+            width: 20px;
+            height: 20px;
+            background: #2563EB;
+            border: 2px solid #FFFFFF;
+            border-radius: 50%;
+            position: absolute;
+            top: -8px;
+            left: 20%;
+            transform: translateX(-50%);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #2563EB;
+            border-radius: 4px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2563EB;
+            color: #FFFFFF;
+            font-size: 14px;
+        }
+        
+        .checkbox-label {
+            font-size: 14px;
+            color: #111827;
+        }
+        
+        .big-button {
+            background: #2563EB;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 16px;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+        }
+        
+        .big-button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="phone">
+        <div class="header">
+            <div class="header-back">←</div>
+            <div class="header-title">방 설정</div>
+            <div class="header-done">완료 ✓</div>
+        </div>
+        
+        <div class="content">
+            <div class="section-title">📋 기본 설정</div>
+            
+            <div class="input-field">
+                <div class="input-label">방 이름</div>
+                <div class="input-value">경찰과 도둑 게임</div>
+            </div>
+            
+            <div class="input-field">
+                <div class="input-label">게임 시간</div>
+                <div class="input-value">30분 ▼</div>
+            </div>
+            
+            <div class="input-field">
+                <div class="input-label">라운드 수</div>
+                <div class="input-value">3 ▼</div>
+            </div>
+            
+            <div class="input-field">
+                <div class="input-label">인원</div>
+                <div class="input-value">6~20명</div>
+            </div>
+            
+            <div class="section-title">👥 팀 설정</div>
+            
+            <div class="radio-group">
+                <div class="radio-item">
+                    <div class="radio-circle"></div>
+                    <div class="radio-label">랜덤 배정</div>
+                </div>
+                <div class="radio-item">
+                    <div class="radio-circle selected"></div>
+                    <div class="radio-label">호스트 지정</div>
+                </div>
+                <div class="radio-item">
+                    <div class="radio-circle"></div>
+                    <div class="radio-label">플레이어 선택</div>
+                </div>
+            </div>
+            
+            <div class="section-title">🎯 게임 규칙</div>
+            
+            <div class="radio-group">
+                <div class="radio-item">
+                    <div class="radio-circle"></div>
+                    <div class="radio-label">전체 공유</div>
+                </div>
+                <div class="radio-item">
+                    <div class="radio-circle selected"></div>
+                    <div class="radio-label">경찰만 확인</div>
+                </div>
+                <div class="radio-item">
+                    <div class="radio-circle"></div>
+                    <div class="radio-label">개인만 확인</div>
+                </div>
+                <div class="radio-item">
+                    <div class="radio-circle"></div>
+                    <div class="radio-label">비공개</div>
+                </div>
+            </div>
+            
+            <div class="section-title">🗺️ 맵 설정</div>
+            
+            <div class="input-field">
+                <div class="input-label">감옥 위치</div>
+                <div class="input-value">지도에서 선택</div>
+            </div>
+            
+            <div class="input-field">
+                <div class="input-label">메모</div>
+                <div class="input-value">공원 벤치</div>
+            </div>
+            
+            <div class="slider-container">
+                <div class="slider-label">
+                    <span>구역 반경</span>
+                    <span>1 km</span>
+                </div>
+                <div class="slider-track">
+                    <div class="slider-progress"></div>
+                    <div class="slider-handle"></div>
+                </div>
+            </div>
+            
+            <div class="checkbox-item">
+                <div class="checkbox">✓</div>
+                <div class="checkbox-label">구역 이탈 시 실격 처리</div>
+            </div>
+            
+            <button class="big-button">방 만들기</button>
+        </div>
+    </div>
+</body>
+</html>

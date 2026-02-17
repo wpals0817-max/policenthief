@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경도 앱 - 대기실 (팀 배정)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #F9FAFB;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .phone {
+            width: 375px;
+            height: 812px;
+            background: #F9FAFB;
+            border-radius: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #FFFFFF;
+            padding: 16px 20px;
+            border-bottom: 1px solid #E5E7EB;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-back {
+            color: #DC2626;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+        }
+        
+        .header-rules {
+            color: #2563EB;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid #2563EB;
+            padding: 4px 12px;
+            border-radius: 8px;
+        }
+        
+        .content {
+            padding: 20px;
+            overflow-y: auto;
+            height: calc(812px - 60px);
+        }
+        
+        .room-code {
+            background: #F0F9FF;
+            border: 1px solid #2563EB;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .room-code-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2563EB;
+        }
+        
+        .room-code-copy {
+            color: #2563EB;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .teams-container {
+            background: #FFFFFF;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .teams-header {
+            display: flex;
+            border-bottom: 2px solid #E5E7EB;
+        }
+        
+        .team-header {
+            flex: 1;
+            padding: 16px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .team-header.police {
+            background: #EFF6FF;
+            color: #2563EB;
+        }
+        
+        .team-header.thief {
+            background: #FEF2F2;
+            color: #DC2626;
+        }
+        
+        .teams-body {
+            display: flex;
+            min-height: 400px;
+        }
+        
+        .team-column {
+            flex: 1;
+            padding: 16px 8px;
+        }
+        
+        .team-column.police {
+            background: #F0F9FF;
+            border-right: 2px solid #E5E7EB;
+        }
+        
+        .team-column.thief {
+            background: #FEF2F2;
+        }
+        
+        .player-card {
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: move;
+        }
+        
+        .player-avatar {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .player-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+        
+        .player-badge {
+            display: inline-block;
+            background: #F59E0B;
+            color: #FFFFFF;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        
+        .drop-zone {
+            border: 2px dashed #2563EB;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            color: #2563EB;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        .drop-arrow {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        
+        .info-box {
+            background: #FFFBEB;
+            border: 1px solid #F59E0B;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .info-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #92400E;
+            margin-bottom: 4px;
+        }
+        
+        .info-text {
+            font-size: 12px;
+            color: #92400E;
+        }
+        
+        .status-box {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .status-text {
+            font-size: 14px;
+            color: #6B7280;
+        }
+        
+        .big-button {
+            background: #2563EB;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 16px;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(37, 99, 235, 0.6);
+            }
+        }
+        
+        .big-button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="phone">
+        <div class="header">
+            <div class="header-back">← 나가기</div>
+            <div class="header-title">대기실</div>
+            <div class="header-rules">[규칙]</div>
+        </div>
+        
+        <div class="content">
+            <div class="room-code">
+                <div class="room-code-text">방 코드: AB1234</div>
+                <div class="room-code-copy">📋 복사</div>
+            </div>
+            
+            <div class="teams-container">
+                <div class="teams-header">
+                    <div class="team-header police">👮 경찰팀 (3명)</div>
+                    <div class="team-header thief">🏃 도둑팀 (3명)</div>
+                </div>
+                
+                <div class="teams-body">
+                    <div class="team-column police">
+                        <div class="player-card">
+                            <div class="player-avatar">👤</div>
+                            <div class="player-name">제민</div>
+                            <div class="player-badge">[호스트]</div>
+                        </div>
+                        
+                        <div class="player-card">
+                            <div class="player-avatar">👤</div>
+                            <div class="player-name">영희</div>
+                        </div>
+                        
+                        <div class="player-card">
+                            <div class="player-avatar">👤</div>
+                            <div class="player-name">수진</div>
+                        </div>
+                        
+                        <div class="drop-zone">
+                            <div class="drop-arrow">↓</div>
+                            <div>여기로 이동</div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-column thief">
+                        <div class="player-card">
+                            <div class="player-avatar">👤</div>
+                            <div class="player-name">철수</div>
+                        </div>
+                        
+                        <div class="player-card">
+                            <div class="player-avatar">👤</div>
+                            <div class="player-name">민수</div>
+                        </div>
+                        
+                        <div class="player-card">
+                            <div class="player-avatar">👤</div>
+                            <div class="player-name">준호</div>
+                        </div>
+                        
+                        <div class="drop-zone">
+                            <div class="drop-arrow">↑</div>
+                            <div>여기로 이동</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <div class="info-title">💡 팀 배정 방법: 호스트 지정</div>
+                <div class="info-text">드래그 앤 드롭으로 팀을 변경하세요</div>
+            </div>
+            
+            <div class="status-box">
+                <div class="status-text">대기 중...  (6/10명)</div>
+            </div>
+            
+            <button class="big-button">게임 시작하기</button>
+        </div>
+    </div>
+</body>
+</html>

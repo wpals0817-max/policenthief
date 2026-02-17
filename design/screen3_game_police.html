@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경도 앱 - 게임 화면 (경찰 모드)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #F9FAFB;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .phone {
+            width: 375px;
+            height: 812px;
+            background: #F9FAFB;
+            border-radius: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .status-bar {
+            background: #EFF6FF;
+            border: 1px solid #2563EB;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .status-timer {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2563EB;
+        }
+        
+        .status-title {
+            font-size: 14px;
+            color: #111827;
+        }
+        
+        .status-end {
+            color: #DC2626;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .player-info {
+            background: #F0F9FF;
+            padding: 12px 20px;
+            border-bottom: 1px solid #BFDBFE;
+        }
+        
+        .player-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+        
+        .player-stats {
+            font-size: 14px;
+            color: #6B7280;
+        }
+        
+        .content {
+            padding: 16px;
+            overflow-y: auto;
+            height: calc(812px - 120px);
+        }
+        
+        .map-container {
+            background: #F0FDF4;
+            border-radius: 16px;
+            height: 280px;
+            position: relative;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        
+        .map-boundary {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border: 2px dashed #9CA3AF;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .map-marker {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .marker-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            border: 2px solid #FFFFFF;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .marker-icon.me {
+            background: #2563EB;
+        }
+        
+        .marker-icon.thief {
+            background: #DC2626;
+        }
+        
+        .marker-icon.jail {
+            background: #9CA3AF;
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            font-size: 24px;
+        }
+        
+        .marker-label {
+            font-size: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #FFFFFF;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-top: 4px;
+            white-space: nowrap;
+        }
+        
+        .me-marker {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .thief1-marker {
+            top: 30%;
+            left: 35%;
+        }
+        
+        .thief2-marker {
+            top: 40%;
+            left: 65%;
+        }
+        
+        .jail-marker {
+            top: 70%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .situation-box {
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .situation-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 12px;
+        }
+        
+        .situation-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #E5E7EB;
+            font-size: 12px;
+            color: #111827;
+        }
+        
+        .situation-item:last-child {
+            border-bottom: none;
+        }
+        
+        .situation-item .warning {
+            color: #DC2626;
+        }
+        
+        .target-card {
+            background: #FEF2F2;
+            border: 1px solid #DC2626;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .target-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #991B1B;
+            margin-bottom: 8px;
+        }
+        
+        .target-info {
+            font-size: 14px;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+        
+        .target-distance {
+            font-size: 12px;
+            color: #6B7280;
+            margin-bottom: 8px;
+        }
+        
+        .small-button {
+            background: #2563EB;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .big-button {
+            background: #2563EB;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 16px;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+        }
+        
+        .big-button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="phone">
+        <div class="status-bar">
+            <div class="status-timer">⏱️ 25:30</div>
+            <div class="status-title">경찰과 도둑</div>
+            <div class="status-end">[종료]</div>
+        </div>
+        
+        <div class="player-info">
+            <div class="player-name">👮 제민 (경찰) ⭐</div>
+            <div class="player-stats">🏃 3명 | ⛓️ 2명 | 👥 6명</div>
+        </div>
+        
+        <div class="content">
+            <div class="map-container">
+                <div class="map-boundary"></div>
+                
+                <div class="map-marker me-marker">
+                    <div class="marker-icon me">👮</div>
+                    <div class="marker-label">나</div>
+                </div>
+                
+                <div class="map-marker thief1-marker">
+                    <div class="marker-icon thief">🏃</div>
+                    <div class="marker-label">도둑1</div>
+                </div>
+                
+                <div class="map-marker thief2-marker">
+                    <div class="marker-icon thief">🏃</div>
+                    <div class="marker-label">도둑2</div>
+                </div>
+                
+                <div class="map-marker jail-marker">
+                    <div class="marker-icon jail">
+                        <div>⛓️<br><span style="font-size:12px">감옥</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="situation-box">
+                <div class="situation-title">📊 실시간 상황 (경찰 전용)</div>
+                <div class="situation-item">🏃 도둑1: 450m (북쪽)</div>
+                <div class="situation-item">🏃 도둑2: 820m (동쪽)</div>
+                <div class="situation-item">⛓️ 도둑3: 감옥 (체포됨)</div>
+                <div class="situation-item">⛓️ 도둑4: 감옥 (체포됨)</div>
+                <div class="situation-item"><span class="warning">🏃 도둑5: 구역 이탈 ⚠️</span></div>
+            </div>
+            
+            <div class="target-card">
+                <div class="target-title">🎯 나와 가장 가까운 도둑</div>
+                <div class="target-info">🏃 도둑1</div>
+                <div class="target-distance">거리: 450m</div>
+                <div class="target-distance">방향: ↗️ 북동쪽</div>
+                <button class="small-button">추적하기</button>
+            </div>
+            
+            <button class="big-button">수동 체포하기</button>
+        </div>
+    </div>
+</body>
+</html>
