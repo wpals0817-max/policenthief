@@ -32,7 +32,8 @@ export interface GameSettings {
   hidingTime: number; // 숨는 시간 (초)
   gameTime: number; // 게임 시간 (분)
   boundaryRadius: number; // 경계 반경 (미터)
-  autoEliminationDistance: number; // 자동 탈락 거리 (미터)
+  autoEliminationDistance: number; // 자동 탈락 거리 (미터, 100m 고정)
+  autoEliminationEnabled?: boolean; // 자동 탈락 활성화 여부
   rescueEnabled: boolean; // 구출 가능 여부
   rescueMethod: "touch" | "dabanggu"; // 구출 방식
   jailLocation?: Location; // 감옥 위치
@@ -158,6 +159,7 @@ export const DEFAULT_SETTINGS: GameSettings = {
   gameTime: 15,
   boundaryRadius: 500,
   autoEliminationDistance: 100,
+  autoEliminationEnabled: true,
   rescueEnabled: true,
   rescueMethod: "touch",
 };

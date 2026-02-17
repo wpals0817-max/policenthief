@@ -312,12 +312,12 @@ export default function CreateRoomPage() {
               <input
                 type="range"
                 min={settingsLimits.policeCount.min}
-                max={Math.min(settingsLimits.policeCount.max, Math.floor(settings.maxPlayers / 3))}
+                max={Math.min(settingsLimits.policeCount.max, Math.floor(settings.maxPlayers / 2))}
                 value={settings.policeCount}
                 onChange={(e) => updateSetting("policeCount", Number(e.target.value))}
                 className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
               />
-              <p className="text-xs text-gray-500 mt-1">권장: 전체 인원의 1/4~1/3</p>
+              <p className="text-xs text-gray-500 mt-1">최대: 전체 인원의 50%</p>
             </div>
           </div>
         </Card>
@@ -330,7 +330,7 @@ export default function CreateRoomPage() {
             <div>
               <label className="block text-sm text-gray-300 mb-2">
                 숨는 시간: <span className="text-yellow-400 font-bold">{settings.hidingTime}초</span>
-                <span className="text-gray-500 text-xs ml-2">({settingsLimits.hidingTime.min}초~{settingsLimits.hidingTime.max / 60}분)</span>
+                <span className="text-gray-500 text-xs ml-2">(10초~2분)</span>
               </label>
               <input
                 type="range"
@@ -352,7 +352,7 @@ export default function CreateRoomPage() {
                 type="range"
                 min={settingsLimits.gameTime.min}
                 max={settingsLimits.gameTime.max}
-                step={5}
+                step={1}
                 value={settings.gameTime}
                 onChange={(e) => updateSetting("gameTime", Number(e.target.value))}
                 className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
@@ -388,19 +388,18 @@ export default function CreateRoomPage() {
             </div>
 
             <div>
-              <label className="block text-sm text-gray-300 mb-2">
-                자동 탈락 거리: <span className="text-red-400 font-bold">{settings.autoEliminationDistance}m</span>
-                <span className="text-gray-500 text-xs ml-2">(경계 밖 {settings.autoEliminationDistance}m 이상 시 탈락)</span>
+              <label className="flex items-center gap-3 text-sm text-gray-300">
+                <input
+                  type="checkbox"
+                  checked={settings.autoEliminationEnabled !== false}
+                  onChange={(e) => updateSetting("autoEliminationEnabled", e.target.checked)}
+                  className="w-5 h-5 rounded bg-gray-700 border-gray-600"
+                />
+                <div>
+                  <span className="text-white">자동 탈락 (경계 밖 100m)</span>
+                  <p className="text-xs text-gray-500">활동 반경을 100m 이상 벗어나면 자동 탈락</p>
+                </div>
               </label>
-              <input
-                type="range"
-                min={settingsLimits.autoEliminationDistance.min}
-                max={settingsLimits.autoEliminationDistance.max}
-                step={10}
-                value={settings.autoEliminationDistance}
-                onChange={(e) => updateSetting("autoEliminationDistance", Number(e.target.value))}
-                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
-              />
             </div>
           </div>
         </Card>
@@ -418,37 +417,10 @@ export default function CreateRoomPage() {
                 className="w-5 h-5 rounded bg-gray-700 border-gray-600"
               />
               <div>
-                <span className="text-white">구출 가능</span>
-                <p className="text-xs text-gray-500">체포된 도둑을 구출할 수 있습니다</p>
+                <span className="text-white">👆 터치 구출 가능</span>
+                <p className="text-xs text-gray-500">감옥에 있는 동료를 터치하여 구출할 수 있습니다</p>
               </div>
             </label>
-
-            {settings.rescueEnabled && (
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  onClick={() => updateSetting("rescueMethod", "touch")}
-                  className={`p-3 rounded-xl border text-sm ${
-                    settings.rescueMethod === "touch"
-                      ? "border-blue-500 bg-blue-500/20 text-blue-400"
-                      : "border-gray-700 bg-gray-800/50 text-gray-400"
-                  }`}
-                >
-                  👆 터치 구출
-                </button>
-                <button
-                  type="button"
-                  onClick={() => updateSetting("rescueMethod", "dabanggu")}
-                  className={`p-3 rounded-xl border text-sm ${
-                    settings.rescueMethod === "dabanggu"
-                      ? "border-blue-500 bg-blue-500/20 text-blue-400"
-                      : "border-gray-700 bg-gray-800/50 text-gray-400"
-                  }`}
-                >
-                  📢 다방구
-                </button>
-              </div>
-            )}
           </div>
         </Card>
 

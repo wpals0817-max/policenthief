@@ -29,19 +29,20 @@ export const defaultSettings: GameSettings = {
   hidingTime: 60,      // 숨는 시간 60초
   gameTime: 15,        // 게임 시간 15분
   boundaryRadius: 300, // 활동 반경 300m (학교 운동장~공원 크기)
-  autoEliminationDistance: 30, // 경계 밖 30m 이상 시 자동 탈락
+  autoEliminationDistance: 100, // 경계 밖 100m 고정
+  autoEliminationEnabled: true,  // 자동 탈락 활성화 여부
   rescueEnabled: true,
-  rescueMethod: "touch",
+  rescueMethod: "touch", // 터치 구출 고정
 };
 
 // 설정 제한값
 export const settingsLimits = {
   maxPlayers: { min: 4, max: 30 },      // 4~30명
-  policeCount: { min: 1, max: 10 },     // 1~10명 (maxPlayers의 절반 미만으로 추가 제한)
-  hidingTime: { min: 30, max: 120 },    // 30초~2분
-  gameTime: { min: 5, max: 30 },        // 5~30분
+  policeCount: { min: 1, max: 15 },     // 1~15명 (maxPlayers의 절반으로 제한)
+  hidingTime: { min: 10, max: 120 },    // 10초~2분
+  gameTime: { min: 5, max: 60 },        // 5~60분
   boundaryRadius: { min: 100, max: 1000 }, // 100m~1km
-  autoEliminationDistance: { min: 20, max: 100 }, // 20~100m
+  autoEliminationDistance: 100,         // 100m 고정
 };
 
 // 새 방 생성
