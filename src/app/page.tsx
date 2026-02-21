@@ -84,17 +84,18 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col p-4 safe-area-top safe-area-bottom">
+    <main className="min-h-screen flex flex-col p-4 safe-area-top safe-area-bottom bg-gray-50">
       {/* 로고 */}
-      <div className="text-center py-4">
-        <div className="text-4xl mb-1">🚔🏃</div>
-        <h1 className="text-2xl font-bold bg-gradient-to-r from-police-400 to-thief-400 text-transparent bg-clip-text">
+      <div className="text-center py-6">
+        <div className="text-5xl mb-2">🚔🏃</div>
+        <h1 className="text-3xl font-bold text-gray-900">
           경찰과 도둑
         </h1>
+        <p className="text-sm text-gray-500 mt-1">실시간 야외 술래잡기</p>
       </div>
 
       {/* 이름 + 버튼 */}
-      <Card variant="glass" padding="md" className="mb-4">
+      <Card variant="default" padding="md" className="mb-4">
         <div className="flex gap-2 mb-3">
           <Input
             placeholder="닉네임 입력"

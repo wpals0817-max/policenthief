@@ -3,7 +3,7 @@
 import { HTMLAttributes, forwardRef } from "react";
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  variant?: "default" | "police" | "thief" | "glass";
+  variant?: "default" | "police" | "thief" | "section";
   padding?: "none" | "sm" | "md" | "lg";
   hover?: boolean;
 }
@@ -21,27 +21,27 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     ref
   ) => {
     const variants = {
-      default: "bg-gray-900/80 border border-gray-800",
-      police: "bg-police-900/30 border border-police-700/50",
-      thief: "bg-thief-900/30 border border-thief-700/50",
-      glass: "bg-white/5 backdrop-blur-xl border border-white/10",
+      default: "bg-white border border-gray-200 shadow-sm",
+      police: "bg-blue-50 border border-blue-200",
+      thief: "bg-red-50 border border-red-200",
+      section: "bg-white border border-gray-200",
     };
 
     const paddings = {
       none: "",
       sm: "p-3",
-      md: "p-5",
-      lg: "p-8",
+      md: "p-4",
+      lg: "p-6",
     };
 
     return (
       <div
         ref={ref}
         className={`
-          rounded-2xl
+          rounded-xl
           ${variants[variant]}
           ${paddings[padding]}
-          ${hover ? "hover:border-gray-600 hover:bg-gray-800/80 transition-all duration-200 cursor-pointer" : ""}
+          ${hover ? "hover:border-gray-300 hover:shadow-md transition-all duration-200 cursor-pointer" : ""}
           ${className}
         `}
         {...props}
