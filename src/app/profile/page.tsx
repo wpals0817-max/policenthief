@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
+import CoupangBanner from "@/components/CoupangBanner";
 import { useGameStore, useProfileStore } from "@/store/gameStore";
 import {
   formatDistance,
@@ -199,6 +200,9 @@ export default function ProfilePage() {
       <Button variant="outline" size="lg" fullWidth onClick={() => router.push("/")}>
         🏠 홈으로
       </Button>
+
+      {/* 쿠팡 배너 */}
+      <CoupangBanner position="bottom" className="mt-6" />
     </main>
   );
 }

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Card from "@/components/Card";
+import CoupangBanner from "@/components/CoupangBanner";
 import { useGameStore } from "@/store/gameStore";
 import { findRoomByCode, joinRoom } from "@/lib/roomService";
 
@@ -155,6 +156,9 @@ export default function JoinRoomPage({ params }: { params: Promise<{ code: strin
           </Button>
         </div>
       </Card>
+
+      {/* 쿠팡 배너 */}
+      <CoupangBanner position="bottom" className="mt-6" />
     </main>
   );
 }

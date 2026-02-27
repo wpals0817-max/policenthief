@@ -6,6 +6,7 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Card from "@/components/Card";
 import GameMap from "@/components/GameMap";
+import CoupangBanner from "@/components/CoupangBanner";
 import { useGameStore } from "@/store/gameStore";
 import { useGeolocation, calculateDistance } from "@/hooks/useGeolocation";
 import { defaultSettings, settingsLimits } from "@/lib/roomUtils";
@@ -435,6 +436,9 @@ export default function CreateRoomPage() {
         >
           🎮 방 만들기
         </Button>
+
+        {/* 쿠팡 배너 */}
+        <CoupangBanner position="bottom" className="mt-4" />
       </div>
     </main>
   );

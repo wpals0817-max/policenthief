@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
+import CoupangBanner from "@/components/CoupangBanner";
 
 type RuleCategory = "basic" | "team" | "capture" | "rescue" | "tips" | "etiquette";
 
@@ -346,6 +347,9 @@ export default function RulesPage() {
           🏠 홈으로
         </Button>
       </div>
+
+      {/* 쿠팡 배너 */}
+      <CoupangBanner position="bottom" className="mt-6" />
     </main>
   );
 }
