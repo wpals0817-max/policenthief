@@ -71,7 +71,7 @@ export default function ResultPage({ params }: { params: Promise<{ code: string 
   if (!currentRoom || currentRoom.status !== "finished") {
     return (
       <main className="min-h-screen flex items-center justify-center p-4">
-        <Card variant="glass" padding="lg" className="text-center">
+        <Card variant="default" padding="lg" className="text-center">
           <p className="text-gray-400">결과를 불러오는 중...</p>
         </Card>
       </main>
@@ -142,7 +142,7 @@ export default function ResultPage({ params }: { params: Promise<{ code: string 
       </div>
 
       {/* 내 기록 */}
-      <Card variant="glass" padding="lg" className="mb-4">
+      <Card variant="default" padding="lg" className="mb-4">
         <h2 className="text-lg font-semibold text-white mb-4">📊 나의 기록</h2>
 
         <div className="grid grid-cols-2 gap-4">
@@ -171,7 +171,7 @@ export default function ResultPage({ params }: { params: Promise<{ code: string 
 
       {/* 이동 경로 */}
       {currentRoom.centerLocation && locationHistory.length > 1 && (
-        <Card variant="glass" padding="none" className="mb-4 overflow-hidden">
+        <Card variant="default" padding="none" className="mb-4 overflow-hidden">
           <div className="p-4 border-b border-gray-800">
             <h2 className="text-lg font-semibold text-white">🗺️ 이동 경로</h2>
           </div>
@@ -188,7 +188,7 @@ export default function ResultPage({ params }: { params: Promise<{ code: string 
       )}
 
       {/* 게임 통계 */}
-      <Card variant="glass" padding="lg" className="mb-4">
+      <Card variant="default" padding="lg" className="mb-4">
         <h2 className="text-lg font-semibold text-white mb-4">📈 게임 통계</h2>
 
         <div className="grid grid-cols-3 gap-4 text-center">
@@ -208,7 +208,7 @@ export default function ResultPage({ params }: { params: Promise<{ code: string 
       </Card>
 
       {/* 최종 순위 */}
-      <Card variant="glass" padding="lg" className="mb-4">
+      <Card variant="default" padding="lg" className="mb-4">
         <h2 className="text-lg font-semibold text-white mb-4">🏆 참가자</h2>
 
         <div className="space-y-3">

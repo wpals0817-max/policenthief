@@ -266,7 +266,7 @@ export default function RulesPage() {
         {currentCategory.rules.map((rule) => (
           <Card
             key={rule.id}
-            variant="glass"
+            variant="default"
             padding="none"
             className="overflow-hidden"
           >
@@ -310,7 +310,7 @@ export default function RulesPage() {
       </div>
 
       {/* 빠른 시작 가이드 */}
-      <Card variant="glass" padding="lg" className="mt-6">
+      <Card variant="default" padding="lg" className="mt-6">
         <h2 className="text-lg font-semibold text-white mb-4">🚀 빠른 시작</h2>
         <ol className="space-y-3">
           <li className="flex items-start gap-3 text-gray-300">

@@ -48,7 +48,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     if (this.state.hasError) {
       return (
         <main className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-b from-gray-900 to-black">
-          <Card variant="glass" padding="lg" className="max-w-md text-center">
+          <Card variant="default" padding="lg" className="max-w-md text-center">
             <div className="text-6xl mb-4">😵</div>
             <h1 className="text-2xl font-bold text-white mb-2">
               오류가 발생했습니다

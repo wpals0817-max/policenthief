@@ -69,31 +69,31 @@ export default function JoinRoomPage({ params }: { params: Promise<{ code: strin
 
   if (isLoading) {
     return (
-      <main className="min-h-screen flex items-center justify-center p-4">
-        <Card variant="glass" padding="lg" className="w-full max-w-md text-center">
+      <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <Card padding="lg" className="w-full max-w-md text-center">
           <div className="text-4xl mb-4 animate-bounce">🔍</div>
-          <p className="text-gray-400">방을 찾는 중...</p>
+          <p className="text-gray-600">방을 찾는 중...</p>
         </Card>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-4">
-      <Card variant="glass" padding="lg" className="w-full max-w-md">
+    <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <Card padding="lg" className="w-full max-w-md">
         <div className="text-center mb-6">
           <div className="text-4xl mb-3">🔗</div>
-          <h1 className="text-2xl font-bold text-white">방 참여하기</h1>
-          <p className="text-gray-400 mt-1">
-            방 코드: <span className="text-blue-400 font-mono">{code.toUpperCase()}</span>
+          <h1 className="text-2xl font-bold text-gray-900">방 참여하기</h1>
+          <p className="text-gray-600 mt-1">
+            방 코드: <span className="text-blue-600 font-mono font-semibold">{code.toUpperCase()}</span>
           </p>
           {roomName && (
-            <p className="text-white mt-2 font-medium">{roomName}</p>
+            <p className="text-gray-900 mt-2 font-medium">{roomName}</p>
           )}
         </div>
 
         {error && (
-          <div className="bg-red-500/20 border border-red-500/50 rounded-xl p-4 mb-4 text-red-400 text-sm text-center">
+          <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-4 text-red-700 text-sm text-center">
             {error}
           </div>
         )}

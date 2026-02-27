@@ -52,7 +52,7 @@ export default function ProfilePage() {
       </div>
 
       {/* 프로필 카드 */}
-      <Card variant="glass" padding="lg" className="mb-6">
+      <Card variant="default" padding="lg" className="mb-6">
         <div className="text-center">
           <div className="w-20 h-20 rounded-full bg-gradient-to-r from-police-500 to-thief-500 mx-auto flex items-center justify-center text-4xl mb-4">
             {totalGames > 50 ? "🏆" : totalGames > 20 ? "⭐" : "👤"}
@@ -63,7 +63,7 @@ export default function ProfilePage() {
       </Card>
 
       {/* 전체 통계 */}
-      <Card variant="glass" padding="lg" className="mb-4">
+      <Card variant="default" padding="lg" className="mb-4">
         <h2 className="text-lg font-semibold text-white mb-4">📊 전체 통계</h2>
 
         <div className="grid grid-cols-3 gap-4 text-center mb-6">
@@ -117,7 +117,7 @@ export default function ProfilePage() {
       </Card>
 
       {/* 포지션별 통계 */}
-      <Card variant="glass" padding="lg" className="mb-4">
+      <Card variant="default" padding="lg" className="mb-4">
         <h2 className="text-lg font-semibold text-white mb-4">🎭 포지션별 통계</h2>
 
         <div className="grid grid-cols-2 gap-4">
@@ -154,7 +154,7 @@ export default function ProfilePage() {
       </Card>
 
       {/* 최근 게임 히스토리 */}
-      <Card variant="glass" padding="lg" className="mb-4">
+      <Card variant="default" padding="lg" className="mb-4">
         <h2 className="text-lg font-semibold text-white mb-4">📜 최근 게임</h2>
 
         {gameHistory.length === 0 ? (
