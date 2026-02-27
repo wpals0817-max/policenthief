@@ -64,14 +64,14 @@ export default function Timer({
   return (
     <div className="flex flex-col items-center gap-3">
       {showProgress && (
-        <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+        <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
           <div
             className={`h-full transition-all duration-1000 ${
               isCritical
-                ? "bg-red-500 animate-pulse"
+                ? "bg-red-600 animate-pulse"
                 : isWarning
-                  ? "bg-yellow-500"
-                  : "bg-green-500"
+                  ? "bg-yellow-600"
+                  : "bg-green-600"
             }`}
             style={{ width: `${progress}%` }}
           />
@@ -82,14 +82,14 @@ export default function Timer({
         className={`
           font-mono font-bold tabular-nums
           ${variants[variant]}
-          ${isCritical ? "text-red-500 animate-pulse" : isWarning ? "text-yellow-500" : "text-white"}
+          ${isCritical ? "text-red-600 animate-pulse" : isWarning ? "text-yellow-600" : "text-gray-900"}
         `}
       >
         {formatTime(seconds)}
       </div>
 
       {isCritical && (
-        <p className="text-red-400 text-sm animate-pulse">시간이 얼마 남지 않았습니다!</p>
+        <p className="text-red-600 text-sm animate-pulse font-medium">시간이 얼마 남지 않았습니다!</p>
       )}
     </div>
   );

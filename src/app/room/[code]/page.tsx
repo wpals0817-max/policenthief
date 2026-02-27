@@ -132,11 +132,11 @@ export default function RoomPage({ params }: { params: Promise<{ code: string }>
 
   if (!currentRoom) {
     return (
-      <main className="min-h-screen flex items-center justify-center p-4">
-        <Card variant="glass" padding="lg" className="text-center">
+      <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <Card padding="lg" className="text-center">
           <div className="text-4xl mb-4">🔍</div>
-          <h1 className="text-xl font-bold text-white mb-2">방을 찾는 중...</h1>
-          <p className="text-gray-400">잠시만 기다려주세요</p>
+          <h1 className="text-xl font-bold text-gray-900 mb-2">방을 찾는 중...</h1>
+          <p className="text-gray-600">잠시만 기다려주세요</p>
           <Button variant="ghost" className="mt-4" onClick={() => router.push("/")}>
             홈으로
           </Button>
@@ -149,13 +149,13 @@ export default function RoomPage({ params }: { params: Promise<{ code: string }>
   const playerCount = players.length;
 
   return (
-    <main className="min-h-screen p-4 safe-area-top safe-area-bottom">
+    <main className="min-h-screen bg-gray-50 p-4 safe-area-top safe-area-bottom">
       {/* 헤더 */}
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h1 className="text-xl font-bold text-white">{currentRoom.name}</h1>
-          <p className="text-gray-400 text-sm">
-            방 코드: <span className="font-mono text-blue-400">{code.toUpperCase()}</span>
+          <h1 className="text-xl font-bold text-gray-900">{currentRoom.name}</h1>
+          <p className="text-gray-600 text-sm">
+            방 코드: <span className="font-mono text-blue-600 font-semibold">{code.toUpperCase()}</span>
           </p>
         </div>
         <Button
@@ -169,8 +169,8 @@ export default function RoomPage({ params }: { params: Promise<{ code: string }>
 
       {/* 위치 오류 경고 */}
       {locationError && (
-        <Card variant="default" padding="sm" className="mb-4 bg-yellow-900/20 border-yellow-700/50">
-          <p className="text-yellow-400 text-sm">⚠️ {locationError}</p>
+        <Card padding="sm" className="mb-4 bg-yellow-50 border-yellow-200">
+          <p className="text-yellow-700 text-sm">⚠️ {locationError}</p>
           <Button variant="ghost" size="sm" className="mt-2" onClick={() => getCurrentLocation()}>
             다시 시도
           </Button>
@@ -179,7 +179,7 @@ export default function RoomPage({ params }: { params: Promise<{ code: string }>
 
       {/* 지도 */}
       {location && (
-        <Card variant="glass" padding="none" className="mb-4 overflow-hidden">
+        <Card padding="none" className="mb-4 overflow-hidden">
           <div className="h-64">
             <GameMap
               center={location}
@@ -190,9 +190,9 @@ export default function RoomPage({ params }: { params: Promise<{ code: string }>
             />
           </div>
           {isHost && (
-            <div className="p-3 border-t border-gray-800">
+            <div className="p-3 border-t border-gray-200">
               {isSettingJail ? (
-                <p className="text-yellow-400 text-sm text-center animate-pulse">
+                <p className="text-yellow-700 text-sm text-center animate-pulse font-medium">
                   🏛️ 지도를 클릭하여 감옥 위치를 설정하세요
                 </p>
               ) : (
@@ -211,28 +211,28 @@ export default function RoomPage({ params }: { params: Promise<{ code: string }>
       )}
 
       {/* 게임 설정 요약 */}
-      <Card variant="glass" padding="md" className="mb-4">
-        <h2 className="text-sm font-semibold text-gray-400 mb-3">⚙️ 게임 설정</h2>
+      <Card padding="md" className="mb-4">
+        <h2 className="text-sm font-semibold text-gray-700 mb-3">⚙️ 게임 설정</h2>
         <div className="grid grid-cols-2 gap-3 text-sm">
           <div className="flex justify-between">
-            <span className="text-gray-400">경찰 수</span>
-            <span className="text-police-400 font-bold">{currentRoom.settings.policeCount}명</span>
+            <span className="text-gray-600">경찰 수</span>
+            <span className="text-blue-600 font-bold">{currentRoom.settings.policeCount}명</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-400">숨는 시간</span>
-            <span className="text-yellow-400 font-bold">{currentRoom.settings.hidingTime}초</span>
+            <span className="text-gray-600">숨는 시간</span>
+            <span className="text-yellow-600 font-bold">{currentRoom.settings.hidingTime}초</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-400">게임 시간</span>
-            <span className="text-green-400 font-bold">{currentRoom.settings.gameTime}분</span>
+            <span className="text-gray-600">게임 시간</span>
+            <span className="text-green-600 font-bold">{currentRoom.settings.gameTime}분</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-400">활동 반경</span>
-            <span className="text-blue-400 font-bold">{currentRoom.settings.boundaryRadius}m</span>
+            <span className="text-gray-600">활동 반경</span>
+            <span className="text-blue-600 font-bold">{currentRoom.settings.boundaryRadius}m</span>
           </div>
           <div className="flex justify-between col-span-2">
-            <span className="text-gray-400">구출</span>
-            <span className="text-white font-bold">
+            <span className="text-gray-600">구출</span>
+            <span className="text-gray-900 font-bold">
               {currentRoom.settings.rescueEnabled
                 ? currentRoom.settings.rescueMethod === "touch"
                   ? "👆 터치 구출"
@@ -244,9 +244,9 @@ export default function RoomPage({ params }: { params: Promise<{ code: string }>
       </Card>
 
       {/* 참가자 목록 */}
-      <Card variant="glass" padding="md" className="mb-4">
+      <Card padding="md" className="mb-4">
         <div className="flex justify-between items-center mb-3">
-          <h2 className="text-sm font-semibold text-gray-400">
+          <h2 className="text-sm font-semibold text-gray-700">
             👥 참가자 ({playerCount}/{currentRoom.settings.maxPlayers})
           </h2>
           <span className="text-xs text-gray-500">
@@ -269,8 +269,8 @@ export default function RoomPage({ params }: { params: Promise<{ code: string }>
             🎮 게임 시작
           </Button>
         ) : (
-          <Card variant="default" padding="md" className="text-center">
-            <p className="text-gray-400">
+          <Card padding="md" className="text-center">
+            <p className="text-gray-600">
               방장이 게임을 시작할 때까지 기다려주세요...
             </p>
           </Card>
@@ -282,10 +282,10 @@ export default function RoomPage({ params }: { params: Promise<{ code: string }>
       </div>
 
       {/* 초대 안내 */}
-      <div className="mt-6 p-4 rounded-xl bg-gradient-to-r from-police-900/30 to-thief-900/30 border border-gray-800 text-center">
-        <p className="text-gray-300 text-sm mb-2">친구를 초대하세요!</p>
-        <p className="text-gray-500 text-xs">
-          초대 링크를 공유하거나 방 코드 <span className="text-blue-400 font-mono">{code.toUpperCase()}</span>를 알려주세요
+      <div className="mt-6 p-4 rounded-xl bg-gradient-to-r from-blue-50 to-red-50 border border-gray-200 text-center">
+        <p className="text-gray-700 text-sm mb-2 font-medium">친구를 초대하세요!</p>
+        <p className="text-gray-600 text-xs">
+          초대 링크를 공유하거나 방 코드 <span className="text-blue-600 font-mono font-semibold">{code.toUpperCase()}</span>를 알려주세요
         </p>
       </div>
 

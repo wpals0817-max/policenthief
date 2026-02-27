@@ -91,11 +91,11 @@ export default function Home() {
         <h1 className="text-3xl font-bold text-gray-900">
           경찰과 도둑
         </h1>
-        <p className="text-sm text-gray-500 mt-1">실시간 야외 술래잡기</p>
+        <p className="text-sm text-gray-600 mt-1">실시간 야외 술래잡기</p>
       </div>
 
       {/* 이름 + 버튼 */}
-      <Card variant="default" padding="md" className="mb-4">
+      <Card padding="md" className="mb-4">
         <div className="flex gap-2 mb-3">
           <Input
             placeholder="닉네임 입력"
@@ -139,28 +139,28 @@ export default function Home() {
       {/* 주변 게임 섹션 */}
       <div className="flex-1 min-h-0">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-semibold text-white">
+          <h2 className="text-lg font-semibold text-gray-900">
             📍 주변 게임
             {nearbyRooms.length > 0 && (
-              <span className="text-sm text-gray-400 ml-2">({nearbyRooms.length})</span>
+              <span className="text-sm text-gray-600 ml-2">({nearbyRooms.length})</span>
             )}
           </h2>
           <div className="flex gap-2">
             <select
               value={searchRadius}
               onChange={(e) => setSearchRadius(Number(e.target.value))}
-              className="bg-gray-800 border border-gray-700 rounded-lg px-2 py-1 text-sm text-gray-300"
+              className="bg-white border border-gray-300 rounded-lg px-2 py-1 text-sm text-gray-700"
             >
               <option value={1000}>1km</option>
               <option value={3000}>3km</option>
               <option value={5000}>5km</option>
               <option value={10000}>10km</option>
             </select>
-            <div className="flex bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
+            <div className="flex bg-white rounded-lg border border-gray-300 overflow-hidden">
               <button
                 onClick={() => setViewMode("list")}
                 className={`px-3 py-1 text-sm ${
-                  viewMode === "list" ? "bg-blue-600 text-white" : "text-gray-400"
+                  viewMode === "list" ? "bg-blue-600 text-white" : "text-gray-600 hover:bg-gray-50"
                 }`}
               >
                 목록
@@ -168,7 +168,7 @@ export default function Home() {
               <button
                 onClick={() => setViewMode("map")}
                 className={`px-3 py-1 text-sm ${
-                  viewMode === "map" ? "bg-blue-600 text-white" : "text-gray-400"
+                  viewMode === "map" ? "bg-blue-600 text-white" : "text-gray-600 hover:bg-gray-50"
                 }`}
               >
                 지도
@@ -178,15 +178,15 @@ export default function Home() {
         </div>
 
         {locationLoading ? (
-          <Card variant="glass" padding="lg" className="text-center">
-            <p className="text-gray-400">📍 위치를 가져오는 중...</p>
+          <Card padding="lg" className="text-center">
+            <p className="text-gray-600">📍 위치를 가져오는 중...</p>
           </Card>
         ) : !location ? (
-          <Card variant="glass" padding="lg" className="text-center">
-            <p className="text-gray-400">위치 권한을 허용해주세요</p>
+          <Card padding="lg" className="text-center">
+            <p className="text-gray-600">위치 권한을 허용해주세요</p>
           </Card>
         ) : viewMode === "map" ? (
-          <Card variant="glass" padding="none" className="overflow-hidden">
+          <Card padding="none" className="overflow-hidden">
             <div className="h-72">
               <NearbyRoomsMap
                 userLocation={location}
@@ -195,7 +195,7 @@ export default function Home() {
               />
             </div>
             {nearbyRooms.length > 0 && (
-              <div className="p-3 border-t border-gray-800 max-h-32 overflow-auto">
+              <div className="p-3 border-t border-gray-200 max-h-32 overflow-auto">
                 {nearbyRooms.slice(0, 3).map((nearbyRoom) => (
                   <NearbyRoomMini
                     key={nearbyRoom.room.id}
@@ -209,13 +209,13 @@ export default function Home() {
         ) : (
           <div className="space-y-2 overflow-auto max-h-[50vh]">
             {isLoadingRooms ? (
-              <Card variant="glass" padding="lg" className="text-center">
-                <p className="text-gray-400">🔍 주변 게임 검색 중...</p>
+              <Card padding="lg" className="text-center">
+                <p className="text-gray-600">🔍 주변 게임 검색 중...</p>
               </Card>
             ) : nearbyRooms.length === 0 ? (
-              <Card variant="glass" padding="lg" className="text-center">
+              <Card padding="lg" className="text-center">
                 <div className="text-3xl mb-2">🏃</div>
-                <p className="text-gray-400 mb-1">주변에 진행 중인 게임이 없습니다</p>
+                <p className="text-gray-700 mb-1">주변에 진행 중인 게임이 없습니다</p>
                 <p className="text-gray-500 text-sm">방을 만들어 친구들을 초대해보세요!</p>
               </Card>
             ) : (
@@ -242,7 +242,7 @@ export default function Home() {
       </div>
 
       {/* 쿠팡 배너 */}
-      <CoupangBanner position="bottom" className="mt-4" />
+      <CoupangBanner position="bottom" className="mt-2" />
     </main>
   );
 }
@@ -260,7 +260,6 @@ function NearbyRoomCard({
 
   return (
     <Card
-      variant="glass"
       padding="sm"
       hover={!isFull}
       onClick={!isFull ? onJoin : undefined}
@@ -269,12 +268,12 @@ function NearbyRoomCard({
       <div className="flex items-center justify-between">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <h3 className="font-medium text-white truncate">{room.name}</h3>
-            {room.password && <span className="text-yellow-500 text-xs">🔒</span>}
+            <h3 className="font-medium text-gray-900 truncate">{room.name}</h3>
+            {room.password && <span className="text-yellow-600 text-xs">🔒</span>}
           </div>
-          <div className="flex items-center gap-3 text-xs text-gray-400 mt-0.5">
+          <div className="flex items-center gap-3 text-xs text-gray-600 mt-0.5">
             <span>👥 {playerCount}/{room.settings.maxPlayers}</span>
-            <span className="text-blue-400">📍 {formatDistance(distance)}</span>
+            <span className="text-blue-600">📍 {formatDistance(distance)}</span>
             <span>⏱️ {room.settings.gameTime}분</span>
           </div>
         </div>
@@ -306,16 +305,16 @@ function NearbyRoomMini({
 
   return (
     <div
-      className="flex items-center justify-between py-2 border-b border-gray-800 last:border-0 cursor-pointer hover:bg-gray-800/50 -mx-3 px-3"
+      className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0 cursor-pointer hover:bg-gray-50 -mx-3 px-3 rounded-lg transition-colors"
       onClick={onJoin}
     >
       <div className="flex-1 min-w-0">
-        <p className="text-white text-sm truncate">{room.name}</p>
-        <p className="text-gray-400 text-xs">
+        <p className="text-gray-900 text-sm truncate font-medium">{room.name}</p>
+        <p className="text-gray-600 text-xs">
           {formatDistance(distance)} • {playerCount}/{room.settings.maxPlayers}명
         </p>
       </div>
-      <span className="text-thief-400 text-sm">참여 →</span>
+      <span className="text-red-600 text-sm font-semibold">참여 →</span>
     </div>
   );
 }

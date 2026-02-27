@@ -438,9 +438,9 @@ export default function GamePage({ params }: { params: Promise<{ code: string }>
 
   if (!currentRoom || !currentPlayer) {
     return (
-      <main className="min-h-screen flex items-center justify-center p-4">
-        <Card variant="glass" padding="lg" className="text-center">
-          <p className="text-gray-400">게임 정보를 불러오는 중...</p>
+      <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <Card padding="lg" className="text-center">
+          <p className="text-gray-600">게임 정보를 불러오는 중...</p>
         </Card>
       </main>
     );
@@ -468,13 +468,13 @@ export default function GamePage({ params }: { params: Promise<{ code: string }>
   }));
 
   return (
-    <main className="min-h-screen flex flex-col">
+    <main className="min-h-screen flex flex-col bg-gray-50">
       {/* 알림 */}
       <div className="fixed top-4 left-0 right-0 z-50 flex flex-col items-center gap-2 px-4">
         {notifications.map((msg, i) => (
           <div
             key={`${msg}-${i}`}
-            className="bg-black/90 border border-gray-700 rounded-xl px-4 py-2 text-white text-sm animate-in fade-in slide-in-from-top duration-300"
+            className="bg-white border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm shadow-lg animate-in fade-in slide-in-from-top duration-300 font-medium"
           >
             {msg}
           </div>
@@ -483,30 +483,30 @@ export default function GamePage({ params }: { params: Promise<{ code: string }>
 
       {/* 경계 이탈 경고 */}
       {outOfBoundsWarning && !isEliminated && (
-        <div className="fixed top-0 left-0 right-0 bg-red-600 text-white py-3 px-4 text-center z-40 animate-pulse">
+        <div className="fixed top-0 left-0 right-0 bg-red-600 text-white py-3 px-4 text-center z-40 animate-pulse font-semibold">
           ⚠️ 경계 이탈! {OUT_OF_BOUNDS_LIMIT - outOfBoundsDuration}초 안에 돌아오세요!
         </div>
       )}
 
       {/* 상단 상태바 */}
-      <div className={`p-4 ${isPolice ? "bg-police-900/50" : "bg-thief-900/50"}`}>
+      <div className={`p-4 ${isPolice ? "bg-blue-600" : "bg-red-600"} text-white shadow-md`}>
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             <span className="text-2xl">{isPolice ? "🚔" : "🏃"}</span>
             <div>
               <p className="text-white font-bold">
                 {currentPlayer.name}
-                {isCaught && <span className="text-red-400 ml-2">⛓️ 체포됨</span>}
-                {isEliminated && <span className="text-gray-500 ml-2">🚫 탈락</span>}
+                {isCaught && <span className="text-red-200 ml-2">⛓️ 체포됨</span>}
+                {isEliminated && <span className="text-gray-300 ml-2">🚫 탈락</span>}
               </p>
-              <p className={`text-sm ${isPolice ? "text-police-300" : "text-thief-300"}`}>
+              <p className={`text-sm ${isPolice ? "text-blue-100" : "text-red-100"}`}>
                 {isPolice ? "경찰" : "도둑"}
               </p>
             </div>
           </div>
 
           <div className="text-right">
-            <p className="text-gray-400 text-xs">
+            <p className="text-white/80 text-xs">
               {gameStatus === "hiding" ? "숨는 시간" : "남은 시간"}
             </p>
             <Timer
@@ -523,18 +523,18 @@ export default function GamePage({ params }: { params: Promise<{ code: string }>
         </div>
 
         {/* 진행 상황 */}
-        <div className="flex gap-4 text-sm">
+        <div className="flex gap-4 text-sm text-white/90">
           <div className="flex items-center gap-1">
-            <span className="text-green-400">🏃 {aliveThieves}</span>
-            <span className="text-gray-500">/</span>
-            <span className="text-red-400">⛓️ {caughtThieves}</span>
-            <span className="text-gray-500">/</span>
-            <span className="text-gray-400">{totalThieves}</span>
+            <span className="text-green-200">🏃 {aliveThieves}</span>
+            <span className="text-white/60">/</span>
+            <span className="text-orange-200">⛓️ {caughtThieves}</span>
+            <span className="text-white/60">/</span>
+            <span className="text-white/80">{totalThieves}</span>
           </div>
-          <div className="text-gray-400">
+          <div className="text-white/80">
             📏 {formatDistance(totalDistance)}
           </div>
-          <div className="text-gray-400">
+          <div className="text-white/80">
             ⚡ {formatSpeed(avgSpeed)}
           </div>
         </div>
@@ -557,19 +557,19 @@ export default function GamePage({ params }: { params: Promise<{ code: string }>
 
         {/* 숨는 시간 오버레이 */}
         {gameStatus === "hiding" && (
-          <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center">
-            <div className="text-center">
+          <div className="absolute inset-0 bg-white/95 flex flex-col items-center justify-center p-4">
+            <div className="text-center max-w-md">
               {isPolice ? (
                 <>
                   <div className="text-6xl mb-4">🙈</div>
-                  <h2 className="text-2xl font-bold text-white mb-2">눈을 감고 기다리세요</h2>
-                  <p className="text-gray-400">도둑들이 숨을 시간을 주세요</p>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">눈을 감고 기다리세요</h2>
+                  <p className="text-gray-600">도둑들이 숨을 시간을 주세요</p>
                 </>
               ) : (
                 <>
                   <div className="text-6xl mb-4">🏃💨</div>
-                  <h2 className="text-2xl font-bold text-white mb-2">빨리 숨으세요!</h2>
-                  <p className="text-gray-400">경찰이 곧 출동합니다</p>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">빨리 숨으세요!</h2>
+                  <p className="text-gray-600">경찰이 곧 출동합니다</p>
                 </>
               )}
               <Timer
@@ -585,17 +585,17 @@ export default function GamePage({ params }: { params: Promise<{ code: string }>
 
         {/* 체포됨 오버레이 */}
         {isCaught && gameStatus === "playing" && (
-          <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center">
-            <div className="text-center">
+          <div className="absolute inset-0 bg-white/95 flex flex-col items-center justify-center p-4">
+            <div className="text-center max-w-md">
               <div className="text-6xl mb-4">⛓️</div>
-              <h2 className="text-2xl font-bold text-white mb-2">체포되었습니다</h2>
-              <p className="text-gray-400 mb-4">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">체포되었습니다</h2>
+              <p className="text-gray-600 mb-4">
                 {currentRoom.settings.rescueEnabled
                   ? "동료가 구출해줄 때까지 기다리세요"
                   : "게임이 끝날 때까지 기다리세요"}
               </p>
-              <Card variant="default" padding="md" className="max-w-xs mx-auto">
-                <p className="text-gray-300 text-sm">
+              <Card padding="md" className="max-w-xs mx-auto">
+                <p className="text-gray-700 text-sm">
                   감옥 위치로 이동하여 대기하세요
                 </p>
               </Card>
@@ -605,15 +605,15 @@ export default function GamePage({ params }: { params: Promise<{ code: string }>
 
         {/* 탈락 오버레이 */}
         {isEliminated && gameStatus === "playing" && (
-          <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center">
-            <div className="text-center">
+          <div className="absolute inset-0 bg-white/95 flex flex-col items-center justify-center p-4">
+            <div className="text-center max-w-md">
               <div className="text-6xl mb-4">🚫</div>
-              <h2 className="text-2xl font-bold text-white mb-2">탈락하였습니다</h2>
-              <p className="text-gray-400 mb-4">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">탈락하였습니다</h2>
+              <p className="text-gray-600 mb-4">
                 경계를 벗어나 게임에서 제외되었습니다
               </p>
-              <Card variant="default" padding="md" className="max-w-xs mx-auto">
-                <p className="text-gray-300 text-sm">
+              <Card padding="md" className="max-w-xs mx-auto">
+                <p className="text-gray-700 text-sm">
                   게임이 끝날 때까지 관전 모드로 전환됩니다
                 </p>
               </Card>
@@ -623,7 +623,7 @@ export default function GamePage({ params }: { params: Promise<{ code: string }>
       </div>
 
       {/* 하단 액션 영역 */}
-      <div className={`p-4 ${isPolice ? "bg-police-900/50" : "bg-thief-900/50"}`}>
+      <div className={`p-4 ${isPolice ? "bg-blue-600" : "bg-red-600"} text-white shadow-[0_-2px_8px_rgba(0,0,0,0.1)]`}>
         {gameStatus === "playing" && !isCaught && !isEliminated && (
           <div className="flex gap-3">
             {isPolice ? (
@@ -654,14 +654,14 @@ export default function GamePage({ params }: { params: Promise<{ code: string }>
 
         {/* 숨는 시간에는 액션 없음 */}
         {gameStatus === "hiding" && (
-          <p className="text-center text-gray-400">
+          <p className="text-center text-white/80">
             {isPolice ? "도둑들이 숨을 때까지 기다리세요..." : "빨리 숨으세요!"}
           </p>
         )}
 
         {/* 탈락 또는 체포 시 */}
         {(isCaught || isEliminated) && gameStatus === "playing" && (
-          <p className="text-center text-gray-400">
+          <p className="text-center text-white/80">
             {isCaught ? "동료의 구출을 기다리는 중..." : "게임 관전 중..."}
           </p>
         )}
@@ -670,15 +670,15 @@ export default function GamePage({ params }: { params: Promise<{ code: string }>
       {/* 플레이어 선택 모달 */}
       {showPlayerList && (
         <div
-          className="fixed inset-0 bg-black/80 z-50 flex items-end justify-center"
+          className="fixed inset-0 bg-black/60 z-50 flex items-end justify-center"
           onClick={() => setShowPlayerList(false)}
         >
           <div
-            className="bg-gray-900 w-full max-w-lg rounded-t-3xl p-4 max-h-[70vh] overflow-auto"
+            className="bg-white w-full max-w-lg rounded-t-3xl p-4 max-h-[70vh] overflow-auto shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="w-12 h-1 bg-gray-700 rounded-full mx-auto mb-4" />
-            <h2 className="text-lg font-bold text-white mb-4">
+            <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-4" />
+            <h2 className="text-lg font-bold text-gray-900 mb-4">
               {isPolice ? "🚔 체포할 도둑 선택" : "🦸 구출할 동료 선택"}
             </h2>
 

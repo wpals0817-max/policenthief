@@ -122,27 +122,27 @@ export default function CreateRoomPage() {
   };
 
   return (
-    <main className="min-h-screen p-4 safe-area-top safe-area-bottom">
+    <main className="min-h-screen bg-gray-50 p-4 safe-area-top safe-area-bottom">
       {/* 헤더 */}
       <div className="flex items-center mb-6">
         <Button variant="ghost" onClick={() => router.back()}>
           ← 뒤로
         </Button>
-        <h1 className="text-2xl font-bold text-white ml-2">방 만들기</h1>
+        <h1 className="text-2xl font-bold text-gray-900 ml-2">방 만들기</h1>
       </div>
 
-      <div className="max-w-lg mx-auto space-y-6">
+      <div className="max-w-lg mx-auto space-y-4">
         {/* 위치 선택 */}
-        <Card variant="glass" padding="lg">
-          <h2 className="text-lg font-semibold text-white mb-4">📍 게임 위치</h2>
+        <Card padding="lg">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">📍 게임 위치</h2>
 
           {locationError ? (
-            <div className="bg-red-500/20 border border-red-500/50 rounded-xl p-4 text-red-400 text-sm">
+            <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-600 text-sm">
               ⚠️ {locationError}
             </div>
           ) : locationLoading || !roomLocation ? (
-            <div className="h-48 flex items-center justify-center bg-gray-800/50 rounded-xl">
-              <p className="text-gray-400">위치를 가져오는 중...</p>
+            <div className="h-48 flex items-center justify-center bg-gray-100 rounded-xl">
+              <p className="text-gray-500">위치를 가져오는 중...</p>
             </div>
           ) : (
             <>
@@ -160,26 +160,26 @@ export default function CreateRoomPage() {
                 <div className={`p-3 rounded-xl mb-3 ${
                   distanceInfo.allowed
                     ? distanceInfo.isRemote
-                      ? "bg-yellow-500/20 border border-yellow-500/50"
-                      : "bg-green-500/20 border border-green-500/50"
-                    : "bg-red-500/20 border border-red-500/50"
+                      ? "bg-yellow-50 border border-yellow-200"
+                      : "bg-green-50 border border-green-200"
+                    : "bg-red-50 border border-red-200"
                 }`}>
                   <div className="flex justify-between items-center">
                     <span className={`text-sm ${
                       distanceInfo.allowed
-                        ? distanceInfo.isRemote ? "text-yellow-400" : "text-green-400"
-                        : "text-red-400"
+                        ? distanceInfo.isRemote ? "text-yellow-700" : "text-green-700"
+                        : "text-red-700"
                     }`}>
                       현재 위치에서 {formatDistance(distanceInfo.distance)}
                     </span>
                     {distanceInfo.isRemote && distanceInfo.allowed && (
-                      <span className="text-xs text-yellow-400">
+                      <span className="text-xs text-yellow-700">
                         원격 생성 {distanceInfo.remainingFree}회 남음
                       </span>
                     )}
                   </div>
                   {!distanceInfo.allowed && distanceInfo.reason && (
-                    <p className="text-red-400 text-xs mt-1">{distanceInfo.reason}</p>
+                    <p className="text-red-600 text-xs mt-1">{distanceInfo.reason}</p>
                   )}
                 </div>
               )}
@@ -205,8 +205,8 @@ export default function CreateRoomPage() {
         </Card>
 
         {/* 기본 설정 */}
-        <Card variant="glass" padding="lg">
-          <h2 className="text-lg font-semibold text-white mb-4">📝 기본 설정</h2>
+        <Card padding="lg">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">📝 기본 설정</h2>
 
           <div className="space-y-4">
             <Input
@@ -219,15 +219,15 @@ export default function CreateRoomPage() {
 
             {/* 공개 설정 */}
             <div>
-              <label className="block text-sm text-gray-300 mb-2">공개 설정</label>
+              <label className="block text-sm text-gray-700 mb-2 font-medium">공개 설정</label>
               <div className="grid grid-cols-3 gap-2">
                 <button
                   type="button"
                   onClick={() => setVisibility("public")}
                   className={`p-3 rounded-xl border text-sm transition-all ${
                     visibility === "public"
-                      ? "border-green-500 bg-green-500/20 text-green-400"
-                      : "border-gray-700 bg-gray-800/50 text-gray-400"
+                      ? "border-green-500 bg-green-50 text-green-700 font-semibold"
+                      : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
                   }`}
                 >
                   🌐 공개
@@ -238,8 +238,8 @@ export default function CreateRoomPage() {
                   onClick={() => setVisibility("private")}
                   className={`p-3 rounded-xl border text-sm transition-all ${
                     visibility === "private"
-                      ? "border-blue-500 bg-blue-500/20 text-blue-400"
-                      : "border-gray-700 bg-gray-800/50 text-gray-400"
+                      ? "border-blue-500 bg-blue-50 text-blue-700 font-semibold"
+                      : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
                   }`}
                 >
                   🔒 비공개
@@ -250,8 +250,8 @@ export default function CreateRoomPage() {
                   onClick={() => setVisibility("friends")}
                   className={`p-3 rounded-xl border text-sm transition-all ${
                     visibility === "friends"
-                      ? "border-purple-500 bg-purple-500/20 text-purple-400"
-                      : "border-gray-700 bg-gray-800/50 text-gray-400"
+                      ? "border-purple-500 bg-purple-50 text-purple-700 font-semibold"
+                      : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
                   }`}
                 >
                   👥 친구
@@ -262,12 +262,12 @@ export default function CreateRoomPage() {
 
             {/* 비밀번호 설정 */}
             <div>
-              <label className="flex items-center gap-2 text-sm text-gray-300 mb-2">
+              <label className="flex items-center gap-2 text-sm text-gray-700 mb-2">
                 <input
                   type="checkbox"
                   checked={usePassword}
                   onChange={(e) => setUsePassword(e.target.checked)}
-                  className="w-4 h-4 rounded bg-gray-700 border-gray-600"
+                  className="w-4 h-4 rounded bg-white border-gray-300"
                 />
                 비밀번호 사용
               </label>
@@ -285,13 +285,13 @@ export default function CreateRoomPage() {
         </Card>
 
         {/* 인원 설정 */}
-        <Card variant="glass" padding="lg">
-          <h2 className="text-lg font-semibold text-white mb-4">👥 인원 설정</h2>
+        <Card padding="lg">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">👥 인원 설정</h2>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm text-gray-300 mb-2">
-                최대 인원: <span className="text-white font-bold">{settings.maxPlayers}명</span>
+              <label className="block text-sm text-gray-700 mb-2">
+                최대 인원: <span className="text-gray-900 font-bold">{settings.maxPlayers}명</span>
                 <span className="text-gray-500 text-xs ml-2">({settingsLimits.maxPlayers.min}~{settingsLimits.maxPlayers.max}명)</span>
               </label>
               <input
@@ -300,13 +300,13 @@ export default function CreateRoomPage() {
                 max={settingsLimits.maxPlayers.max}
                 value={settings.maxPlayers}
                 onChange={(e) => updateSetting("maxPlayers", Number(e.target.value))}
-                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
               />
             </div>
 
             <div>
-              <label className="block text-sm text-gray-300 mb-2">
-                경찰 수: <span className="text-police-400 font-bold">{settings.policeCount}명</span>
+              <label className="block text-sm text-gray-700 mb-2">
+                경찰 수: <span className="text-blue-600 font-bold">{settings.policeCount}명</span>
                 <span className="text-gray-500 text-xs ml-2">(도둑 {settings.maxPlayers - settings.policeCount}명)</span>
               </label>
               <input
@@ -315,7 +315,7 @@ export default function CreateRoomPage() {
                 max={Math.min(settingsLimits.policeCount.max, Math.floor(settings.maxPlayers / 2))}
                 value={settings.policeCount}
                 onChange={(e) => updateSetting("policeCount", Number(e.target.value))}
-                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
               />
               <p className="text-xs text-gray-500 mt-1">최대: 전체 인원의 50%</p>
             </div>
@@ -323,13 +323,13 @@ export default function CreateRoomPage() {
         </Card>
 
         {/* 시간 설정 */}
-        <Card variant="glass" padding="lg">
-          <h2 className="text-lg font-semibold text-white mb-4">⏱️ 시간 설정</h2>
+        <Card padding="lg">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">⏱️ 시간 설정</h2>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm text-gray-300 mb-2">
-                숨는 시간: <span className="text-yellow-400 font-bold">{settings.hidingTime}초</span>
+              <label className="block text-sm text-gray-700 mb-2">
+                숨는 시간: <span className="text-yellow-600 font-bold">{settings.hidingTime}초</span>
                 <span className="text-gray-500 text-xs ml-2">(10초~2분)</span>
               </label>
               <input
@@ -339,13 +339,13 @@ export default function CreateRoomPage() {
                 step={10}
                 value={settings.hidingTime}
                 onChange={(e) => updateSetting("hidingTime", Number(e.target.value))}
-                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-yellow-600"
               />
             </div>
 
             <div>
-              <label className="block text-sm text-gray-300 mb-2">
-                게임 시간: <span className="text-green-400 font-bold">{settings.gameTime}분</span>
+              <label className="block text-sm text-gray-700 mb-2">
+                게임 시간: <span className="text-green-600 font-bold">{settings.gameTime}분</span>
                 <span className="text-gray-500 text-xs ml-2">({settingsLimits.gameTime.min}~{settingsLimits.gameTime.max}분)</span>
               </label>
               <input
@@ -355,20 +355,20 @@ export default function CreateRoomPage() {
                 step={1}
                 value={settings.gameTime}
                 onChange={(e) => updateSetting("gameTime", Number(e.target.value))}
-                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-600"
               />
             </div>
           </div>
         </Card>
 
         {/* 공간 설정 */}
-        <Card variant="glass" padding="lg">
-          <h2 className="text-lg font-semibold text-white mb-4">🗺️ 공간 설정</h2>
+        <Card padding="lg">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">🗺️ 공간 설정</h2>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm text-gray-300 mb-2">
-                활동 반경: <span className="text-blue-400 font-bold">{settings.boundaryRadius}m</span>
+              <label className="block text-sm text-gray-700 mb-2">
+                활동 반경: <span className="text-blue-600 font-bold">{settings.boundaryRadius}m</span>
                 <span className="text-gray-500 text-xs ml-2">({settingsLimits.boundaryRadius.min}m~{settingsLimits.boundaryRadius.max / 1000}km)</span>
               </label>
               <input
@@ -378,9 +378,9 @@ export default function CreateRoomPage() {
                 step={50}
                 value={settings.boundaryRadius}
                 onChange={(e) => updateSetting("boundaryRadius", Number(e.target.value))}
-                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
               />
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-gray-600 mt-1">
                 {settings.boundaryRadius <= 200 ? "🏫 교실/소규모" :
                  settings.boundaryRadius <= 400 ? "🏟️ 운동장 크기" :
                  settings.boundaryRadius <= 700 ? "🌳 공원 크기" : "🏘️ 동네 크기"}
@@ -388,16 +388,16 @@ export default function CreateRoomPage() {
             </div>
 
             <div>
-              <label className="flex items-center gap-3 text-sm text-gray-300">
+              <label className="flex items-center gap-3 text-sm text-gray-700">
                 <input
                   type="checkbox"
                   checked={settings.autoEliminationEnabled !== false}
                   onChange={(e) => updateSetting("autoEliminationEnabled", e.target.checked)}
-                  className="w-5 h-5 rounded bg-gray-700 border-gray-600"
+                  className="w-5 h-5 rounded bg-white border-gray-300 accent-blue-600"
                 />
                 <div>
-                  <span className="text-white">자동 탈락 (경계 밖 100m)</span>
-                  <p className="text-xs text-gray-500">활동 반경을 100m 이상 벗어나면 자동 탈락</p>
+                  <span className="text-gray-900 font-medium">자동 탈락 (경계 밖 100m)</span>
+                  <p className="text-xs text-gray-600">활동 반경을 100m 이상 벗어나면 자동 탈락</p>
                 </div>
               </label>
             </div>
@@ -405,20 +405,20 @@ export default function CreateRoomPage() {
         </Card>
 
         {/* 구출 룰 */}
-        <Card variant="glass" padding="lg">
-          <h2 className="text-lg font-semibold text-white mb-4">⛓️ 구출 룰</h2>
+        <Card padding="lg">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">⛓️ 구출 룰</h2>
 
           <div className="space-y-4">
-            <label className="flex items-center gap-3 text-sm text-gray-300">
+            <label className="flex items-center gap-3 text-sm text-gray-700">
               <input
                 type="checkbox"
                 checked={settings.rescueEnabled}
                 onChange={(e) => updateSetting("rescueEnabled", e.target.checked)}
-                className="w-5 h-5 rounded bg-gray-700 border-gray-600"
+                className="w-5 h-5 rounded bg-white border-gray-300 accent-blue-600"
               />
               <div>
-                <span className="text-white">👆 터치 구출 가능</span>
-                <p className="text-xs text-gray-500">감옥에 있는 동료를 터치하여 구출할 수 있습니다</p>
+                <span className="text-gray-900 font-medium">👆 터치 구출 가능</span>
+                <p className="text-xs text-gray-600">감옥에 있는 동료를 터치하여 구출할 수 있습니다</p>
               </div>
             </label>
           </div>
