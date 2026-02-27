@@ -242,7 +242,7 @@ export default function Home() {
       </div>
 
       {/* 쿠팡 배너 */}
-      <CoupangBanner position="bottom" className="mt-2" />
+      <CoupangBanner position="bottom" className="mt-1" />
     </main>
   );
 }
