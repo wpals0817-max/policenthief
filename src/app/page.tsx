@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Car, UserX, Gamepad2, Link2, MapPin, Clock, Users, BookOpen, User } from "lucide-react";
+import { UserX, Gamepad2, Link2, MapPin, Clock, Users, BookOpen, User } from "lucide-react";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Card from "@/components/Card";
 import GameMap from "@/components/GameMap";
+import GameLogo from "@/components/GameLogo";
 import CoupangBanner from "@/components/CoupangBanner";
 import { useGameStore } from "@/store/gameStore";
 import { useGeolocation } from "@/hooks/useGeolocation";
@@ -87,16 +88,9 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col p-4 safe-area-top safe-area-bottom bg-gray-50">
       {/* 로고 */}
-      <div className="text-center py-6">
-        <div className="flex items-center justify-center gap-3 mb-3">
-          <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center">
-            <Car className="w-9 h-9 text-blue-600" strokeWidth={2.5} />
-          </div>
-          <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center">
-            <UserX className="w-9 h-9 text-red-600" strokeWidth={2.5} />
-          </div>
-        </div>
-        <h1 className="text-3xl font-bold text-gray-900">
+      <div className="text-center py-8">
+        <GameLogo />
+        <h1 className="text-3xl font-bold text-gray-900 mt-2">
           경찰과 도둑
         </h1>
         <p className="text-sm text-gray-600 mt-1">실시간 야외 술래잡기</p>
