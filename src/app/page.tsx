@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { Car, UserX, Gamepad2, Link2, MapPin, Clock, Users, BookOpen, User } from "lucide-react";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Card from "@/components/Card";
@@ -87,7 +88,14 @@ export default function Home() {
     <main className="min-h-screen flex flex-col p-4 safe-area-top safe-area-bottom bg-gray-50">
       {/* 로고 */}
       <div className="text-center py-6">
-        <div className="text-5xl mb-2">🚔🏃</div>
+        <div className="flex items-center justify-center gap-3 mb-3">
+          <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center">
+            <Car className="w-9 h-9 text-blue-600" strokeWidth={2.5} />
+          </div>
+          <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center">
+            <UserX className="w-9 h-9 text-red-600" strokeWidth={2.5} />
+          </div>
+        </div>
         <h1 className="text-3xl font-bold text-gray-900">
           경찰과 도둑
         </h1>
@@ -108,7 +116,8 @@ export default function Home() {
 
         <div className="grid grid-cols-2 gap-2">
           <Button variant="police" size="md" fullWidth onClick={handleCreateRoom}>
-            🎮 방 만들기
+            <Gamepad2 className="w-5 h-5 mr-1.5" />
+            방 만들기
           </Button>
           <Button
             variant="outline"
@@ -116,7 +125,8 @@ export default function Home() {
             fullWidth
             onClick={() => setShowJoinInput(!showJoinInput)}
           >
-            🔗 코드 입장
+            <Link2 className="w-5 h-5 mr-1.5" />
+            코드 입장
           </Button>
         </div>
 
@@ -139,10 +149,11 @@ export default function Home() {
       {/* 주변 게임 섹션 */}
       <div className="flex-1 min-h-0">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-semibold text-gray-900">
-            📍 주변 게임
+          <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+            <MapPin className="w-5 h-5 text-blue-600" />
+            주변 게임
             {nearbyRooms.length > 0 && (
-              <span className="text-sm text-gray-600 ml-2">({nearbyRooms.length})</span>
+              <span className="text-sm text-gray-600 ml-1">({nearbyRooms.length})</span>
             )}
           </h2>
           <div className="flex gap-2">
@@ -179,11 +190,17 @@ export default function Home() {
 
         {locationLoading ? (
           <Card padding="lg" className="text-center">
-            <p className="text-gray-600">📍 위치를 가져오는 중...</p>
+            <div className="flex items-center justify-center gap-2 text-gray-600">
+              <MapPin className="w-5 h-5 animate-pulse" />
+              <p>위치를 가져오는 중...</p>
+            </div>
           </Card>
         ) : !location ? (
           <Card padding="lg" className="text-center">
-            <p className="text-gray-600">위치 권한을 허용해주세요</p>
+            <div className="flex flex-col items-center gap-2">
+              <MapPin className="w-8 h-8 text-gray-400" />
+              <p className="text-gray-600">위치 권한을 허용해주세요</p>
+            </div>
           </Card>
         ) : viewMode === "map" ? (
           <Card padding="none" className="overflow-hidden">
@@ -210,13 +227,22 @@ export default function Home() {
           <div className="space-y-2 overflow-auto max-h-[50vh]">
             {isLoadingRooms ? (
               <Card padding="lg" className="text-center">
-                <p className="text-gray-600">🔍 주변 게임 검색 중...</p>
+                <div className="flex items-center justify-center gap-2 text-gray-600">
+                  <MapPin className="w-5 h-5 animate-pulse" />
+                  <p>주변 게임 검색 중...</p>
+                </div>
               </Card>
             ) : nearbyRooms.length === 0 ? (
               <Card padding="lg" className="text-center">
-                <div className="text-3xl mb-2">🏃</div>
-                <p className="text-gray-700 mb-1">주변에 진행 중인 게임이 없습니다</p>
-                <p className="text-gray-500 text-sm">방을 만들어 친구들을 초대해보세요!</p>
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
+                    <UserX className="w-8 h-8 text-gray-400" />
+                  </div>
+                  <div>
+                    <p className="text-gray-700 mb-1 font-medium">주변에 진행 중인 게임이 없습니다</p>
+                    <p className="text-gray-500 text-sm">방을 만들어 친구들을 초대해보세요!</p>
+                  </div>
+                </div>
               </Card>
             ) : (
               nearbyRooms.map((nearbyRoom) => (
@@ -234,10 +260,12 @@ export default function Home() {
       {/* 하단 메뉴 */}
       <div className="flex gap-4 mt-4 justify-center">
         <Button variant="ghost" size="sm" onClick={() => router.push("/rules")}>
-          📖 룰북
+          <BookOpen className="w-4 h-4 mr-1.5" />
+          룰북
         </Button>
         <Button variant="ghost" size="sm" onClick={() => router.push("/profile")}>
-          👤 내 기록
+          <User className="w-4 h-4 mr-1.5" />
+          내 기록
         </Button>
       </div>
 
@@ -272,9 +300,18 @@ function NearbyRoomCard({
             {room.password && <span className="text-yellow-600 text-xs">🔒</span>}
           </div>
           <div className="flex items-center gap-3 text-xs text-gray-600 mt-0.5">
-            <span>👥 {playerCount}/{room.settings.maxPlayers}</span>
-            <span className="text-blue-600">📍 {formatDistance(distance)}</span>
-            <span>⏱️ {room.settings.gameTime}분</span>
+            <span className="flex items-center gap-1">
+              <Users className="w-3.5 h-3.5" />
+              {playerCount}/{room.settings.maxPlayers}
+            </span>
+            <span className="text-blue-600 flex items-center gap-1">
+              <MapPin className="w-3.5 h-3.5" />
+              {formatDistance(distance)}
+            </span>
+            <span className="flex items-center gap-1">
+              <Clock className="w-3.5 h-3.5" />
+              {room.settings.gameTime}분
+            </span>
           </div>
         </div>
         <Button

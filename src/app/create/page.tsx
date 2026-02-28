@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { ArrowLeft, MapPin, Globe, Lock, Users as UsersIcon, Gamepad2 } from "lucide-react";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Card from "@/components/Card";
@@ -127,7 +128,8 @@ export default function CreateRoomPage() {
       {/* 헤더 */}
       <div className="flex items-center mb-6">
         <Button variant="ghost" onClick={() => router.back()}>
-          ← 뒤로
+          <ArrowLeft className="w-5 h-5 mr-1" />
+          뒤로
         </Button>
         <h1 className="text-2xl font-bold text-gray-900 ml-2">방 만들기</h1>
       </div>
@@ -434,7 +436,8 @@ export default function CreateRoomPage() {
           onClick={handleCreate}
           disabled={!roomLocation || Boolean(distanceInfo && !distanceInfo.allowed)}
         >
-          🎮 방 만들기
+          <Gamepad2 className="w-5 h-5 mr-2" />
+          방 만들기
         </Button>
 
         {/* 쿠팡 배너 */}

@@ -5,11 +5,11 @@ export const colors = {
   background: '#F9FAFB',
   surface: '#FFFFFF',
   
-  // 텍스트
+  // 텍스트 (대비 개선)
   text: {
-    primary: '#111827',
-    secondary: '#6B7280',
-    tertiary: '#9CA3AF',
+    primary: '#0F172A', // 더 진하게
+    secondary: '#475569', // 더 진하게
+    tertiary: '#64748B', // 더 진하게
   },
   
   // 테두리
