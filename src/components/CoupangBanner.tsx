@@ -12,8 +12,11 @@ export default function CoupangBanner({
   className = ''
 }: CoupangBannerProps) {
   const [isMobile, setIsMobile] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    
     // 화면 크기 체크
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
@@ -25,39 +28,30 @@ export default function CoupangBanner({
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // 서버 사이드 렌더링 방지
+  if (!mounted) {
+    return (
+      <div className={`w-full bg-white border border-gray-300 rounded-xl shadow-md ${className}`}>
+        <div className="text-center py-4">
+          <span className="text-gray-400 text-sm">광고 로딩 중...</span>
+        </div>
+      </div>
+    );
+  }
+
   // 모바일용 배너 (340x60)
   const mobileBanner = `
-    <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
-      <div id="coupang-mobile-banner"></div>
-    </div>
     <script src="https://ads-partners.coupang.com/g.js"></script>
     <script>
-      new PartnersCoupang.G({
-        "id": 965686,
-        "template": "carousel",
-        "trackingCode": "AF4963764",
-        "width": "340",
-        "height": "60",
-        "tsource": ""
-      });
+      new PartnersCoupang.G({"id":965686,"template":"carousel","trackingCode":"AF4963764","width":"340","height":"60","tsource":""});
     </script>
   `;
 
   // PC용 배너 (728x110)
   const desktopBanner = `
-    <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
-      <div id="coupang-desktop-banner"></div>
-    </div>
     <script src="https://ads-partners.coupang.com/g.js"></script>
     <script>
-      new PartnersCoupang.G({
-        "id": 966991,
-        "template": "carousel",
-        "trackingCode": "AF4963764",
-        "width": "728",
-        "height": "110",
-        "tsource": ""
-      });
+      new PartnersCoupang.G({"id":966991,"template":"carousel","trackingCode":"AF4963764","width":"728","height":"110","tsource":""});
     </script>
   `;
 
@@ -70,6 +64,7 @@ export default function CoupangBanner({
       
       {/* 쿠팡 배너 - 반응형 + 중앙 정렬 */}
       <div 
+        key={isMobile ? 'mobile' : 'desktop'}
         className="w-full flex justify-center items-center py-2 min-h-[70px]"
         dangerouslySetInnerHTML={{
           __html: isMobile ? mobileBanner : desktopBanner
