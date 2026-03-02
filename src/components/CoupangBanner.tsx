@@ -62,17 +62,22 @@ export default function CoupangBanner({
   `;
 
   return (
-    <div className={`w-full bg-gray-50 border-t border-gray-200 ${className}`}>
+    <div className={`w-full bg-white border border-gray-300 rounded-xl shadow-md ${className}`}>
+      {/* 광고 라벨 */}
+      <div className="text-center pt-2 pb-1">
+        <span className="text-[10px] text-gray-500 font-medium">AD</span>
+      </div>
+      
       {/* 쿠팡 배너 - 반응형 + 중앙 정렬 */}
       <div 
-        className="w-full flex justify-center items-center py-3"
+        className="w-full flex justify-center items-center py-2 min-h-[70px]"
         dangerouslySetInnerHTML={{
           __html: isMobile ? mobileBanner : desktopBanner
         }}
       />
       
       {/* 면책 문구 - 중앙 정렬 */}
-      <p className="text-center text-gray-600 text-[10px] px-4 pb-3">
+      <p className="text-center text-gray-500 text-[10px] px-4 pb-3">
         이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
       </p>
     </div>

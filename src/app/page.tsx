@@ -251,8 +251,11 @@ export default function Home() {
         )}
       </div>
 
+      {/* 쿠팡 배너 */}
+      <CoupangBanner position="bottom" className="mt-6 mb-4" />
+
       {/* 하단 메뉴 */}
-      <div className="flex gap-4 mt-4 justify-center">
+      <div className="flex gap-4 justify-center">
         <Button variant="ghost" size="sm" onClick={() => router.push("/rules")}>
           <BookOpen className="w-4 h-4 mr-1.5" />
           룰북
@@ -262,9 +265,6 @@ export default function Home() {
           내 기록
         </Button>
       </div>
-
-      {/* 쿠팡 배너 */}
-      <CoupangBanner position="bottom" className="mt-1" />
     </main>
   );
 }
