@@ -25,7 +25,7 @@ export default function CoupangBanner({
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // 모바일용 배너 (320x50)
+  // 모바일용 배너 (340x60)
   const mobileBanner = `
     <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
       <div id="coupang-mobile-banner"></div>
@@ -36,8 +36,8 @@ export default function CoupangBanner({
         "id": 965686,
         "template": "carousel",
         "trackingCode": "AF4963764",
-        "width": "320",
-        "height": "50",
+        "width": "340",
+        "height": "60",
         "tsource": ""
       });
     </script>
