@@ -39,7 +39,6 @@ export default function RootLayout({
       <head>
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
         <link rel="preconnect" href="https://unpkg.com" />
-        <script src="https://ads-partners.coupang.com/g.js" async></script>
       </head>
       <body className="antialiased min-h-screen bg-[#0a0a0a]">
         <ErrorBoundary>
