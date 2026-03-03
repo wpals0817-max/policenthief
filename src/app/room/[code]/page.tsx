@@ -38,9 +38,8 @@ export default function RoomPage({ params }: { params: Promise<{ code: string }>
     }
   }, [location, setCurrentLocation]);
 
-  // 방 실시간 구독
+  // 방 초기 로드
   useEffect(() => {
-    // 방 정보가 없으면 먼저 가져오기
     if (!currentRoom) {
       findRoomByCode(code).then((room) => {
         if (room) {
@@ -48,8 +47,10 @@ export default function RoomPage({ params }: { params: Promise<{ code: string }>
         }
       });
     }
+  }, [code, currentRoom, setCurrentRoom]);
 
-    // 실시간 구독
+  // 방 실시간 구독 (별도 effect)
+  useEffect(() => {
     const unsubscribe = subscribeToRoom(code, (room) => {
       if (room) {
         setCurrentRoom(room);
@@ -61,7 +62,7 @@ export default function RoomPage({ params }: { params: Promise<{ code: string }>
     });
 
     return () => unsubscribe();
-  }, [code, currentRoom, setCurrentRoom, router]);
+  }, [code, setCurrentRoom, router]);
 
   // 초대 링크 복사
   const handleCopyInviteLink = async () => {
