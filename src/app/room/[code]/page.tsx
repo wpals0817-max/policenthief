@@ -42,18 +42,35 @@ export default function RoomPage({ params }: { params: Promise<{ code: string }>
   useEffect(() => {
     let mounted = true;
     
-    if (!currentRoom) {
-      findRoomByCode(code).then((room) => {
-        if (room && mounted) {
-          setCurrentRoom(room);
-        }
-      });
+    // currentRoom이 이미 있고 code가 일치하면 스킵
+    if (currentRoom && currentRoom.code === code.toUpperCase()) {
+      console.log("Room already loaded:", code);
+      return;
     }
+    
+    // 방 찾기
+    console.log("Finding room:", code);
+    findRoomByCode(code).then((room) => {
+      if (room && mounted) {
+        console.log("Room found and loaded:", room.code);
+        setCurrentRoom(room);
+      } else if (!room && mounted) {
+        console.error("Room not found:", code);
+        alert("방을 찾을 수 없습니다. 홈으로 돌아갑니다.");
+        router.push("/");
+      }
+    }).catch(error => {
+      console.error("Error finding room:", error);
+      if (mounted) {
+        alert("방을 찾는 중 오류가 발생했습니다.");
+        router.push("/");
+      }
+    });
 
     return () => {
       mounted = false;
     };
-  }, [code]); // currentRoom 의존성 제거
+  }, [code, currentRoom, setCurrentRoom, router]);
 
   // 방 실시간 구독 (별도 effect)
   useEffect(() => {

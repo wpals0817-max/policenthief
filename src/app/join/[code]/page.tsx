@@ -80,85 +80,87 @@ export default function JoinRoomPage({ params }: { params: Promise<{ code: strin
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <Card padding="lg" className="w-full max-w-md">
-        <div className="text-center mb-6">
-          <div className="text-4xl mb-3">🔗</div>
-          <h1 className="text-2xl font-bold text-gray-900">방 참여하기</h1>
-          <p className="text-gray-600 mt-1">
-            방 코드: <span className="text-blue-600 font-mono font-semibold">{code.toUpperCase()}</span>
-          </p>
-          {roomName && (
-            <p className="text-gray-900 mt-2 font-medium">{roomName}</p>
-          )}
-        </div>
-
-        {error && (
-          <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-4 text-red-700 text-sm text-center">
-            {error}
+    <main className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
+      <div className="w-full max-w-md space-y-4">
+        <Card padding="lg">
+          <div className="text-center mb-6">
+            <div className="text-4xl mb-3">🔗</div>
+            <h1 className="text-2xl font-bold text-gray-900">방 참여하기</h1>
+            <p className="text-gray-600 mt-1 break-words">
+              방 코드: <span className="text-blue-600 font-mono font-semibold">{code.toUpperCase()}</span>
+            </p>
+            {roomName && (
+              <p className="text-gray-900 mt-2 font-medium break-words">{roomName}</p>
+            )}
           </div>
-        )}
 
-        {needPassword && !error && (
-          <div className="mb-4">
-            <Input
-              type="password"
-              label="비밀번호"
-              placeholder="방 비밀번호를 입력하세요"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-        )}
-
-        <div className="space-y-3">
-          {!error ? (
-            <Button
-              variant="thief"
-              size="lg"
-              fullWidth
-              isLoading={isJoining}
-              onClick={handleJoin}
-            >
-              🏃 참여하기
-            </Button>
-          ) : (
-            <Button
-              variant="primary"
-              size="lg"
-              fullWidth
-              onClick={() => {
-                setError("");
-                setIsLoading(true);
-                findRoomByCode(code).then((room) => {
-                  if (room) {
-                    setRoomName(room.name);
-                    setNeedPassword(!!room.password);
-                    setError("");
-                  } else {
-                    setError("방을 찾을 수 없습니다.");
-                  }
-                  setIsLoading(false);
-                });
-              }}
-            >
-              🔄 다시 시도
-            </Button>
+          {error && (
+            <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-4">
+              <p className="text-red-700 text-sm text-center break-words">{error}</p>
+            </div>
           )}
 
-          <Button
-            variant="ghost"
-            size="md"
-            fullWidth
-            onClick={() => router.push("/")}
-          >
-            홈으로 돌아가기
-          </Button>
-        </div>
-      </Card>
+          {needPassword && !error && (
+            <div className="mb-4">
+              <Input
+                type="password"
+                label="비밀번호"
+                placeholder="방 비밀번호를 입력하세요"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+          )}
 
-      {/* 쿠팡 배너 */}
-      <CoupangBanner position="bottom" className="mt-6" />
+          <div className="space-y-3">
+            {!error ? (
+              <Button
+                variant="thief"
+                size="lg"
+                fullWidth
+                isLoading={isJoining}
+                onClick={handleJoin}
+              >
+                🏃 참여하기
+              </Button>
+            ) : (
+              <Button
+                variant="primary"
+                size="lg"
+                fullWidth
+                onClick={() => {
+                  setError("");
+                  setIsLoading(true);
+                  findRoomByCode(code).then((room) => {
+                    if (room) {
+                      setRoomName(room.name);
+                      setNeedPassword(!!room.password);
+                      setError("");
+                    } else {
+                      setError("방을 찾을 수 없습니다.");
+                    }
+                    setIsLoading(false);
+                  });
+                }}
+              >
+                🔄 다시 시도
+              </Button>
+            )}
+
+            <Button
+              variant="ghost"
+              size="md"
+              fullWidth
+              onClick={() => router.push("/")}
+            >
+              홈으로 돌아가기
+            </Button>
+          </div>
+        </Card>
+
+        {/* 쿠팡 배너 */}
+        <CoupangBanner position="bottom" />
+      </div>
     </main>
   );
 }
