@@ -1,0 +1,46 @@
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › tests/game-simulation.spec.ts:32:7 › 경찰과 도둑 게임 시뮬레이션 › 🎮 전체 게임 플로우 테스트
+[1A[2K[chromium] › tests/game-simulation.spec.ts:32:7 › 경찰과 도둑 게임 시뮬레이션 › 🎮 전체 게임 플로우 테스트
+🚀 게임 시뮬레이션 시작...
+
+
+[1A[2K👤 플레이어 1 (호스트) 생성 중...
+
+[1A[2K  1) [chromium] › tests/game-simulation.spec.ts:32:7 › 경찰과 도둑 게임 시뮬레이션 › 🎮 전체 게임 플로우 테스트 ──────────
+
+    Error: browser.newContext: geolocation.longitude: expected float, got undefined
+
+      35 |     // 1. 호스트 (방장) 생성
+      36 |     console.log('👤 플레이어 1 (호스트) 생성 중...');
+    > 37 |     const hostContext = await browser.newContext({
+         |                         ^
+      38 |       geolocation: locations.center,
+      39 |       permissions: ['geolocation'],
+      40 |     });
+        at /Users/jm/Documents/policenthief/tests/game-simulation.spec.ts:37:25
+
+
+[1A[2K[2/2] [chromium] › tests/game-simulation.spec.ts:162:7 › 경찰과 도둑 게임 시뮬레이션 › 🔍 빠른 연결 테스트
+[1A[2K[chromium] › tests/game-simulation.spec.ts:162:7 › 경찰과 도둑 게임 시뮬레이션 › 🔍 빠른 연결 테스트
+🔍 빠른 연결 테스트 시작...
+
+
+[1A[2K  2) [chromium] › tests/game-simulation.spec.ts:162:7 › 경찰과 도둑 게임 시뮬레이션 › 🔍 빠른 연결 테스트 ─────────────
+
+    Error: browser.newContext: geolocation.longitude: expected float, got undefined
+
+      164 |
+      165 |     // 단순히 페이지 로드 확인
+    > 166 |     const context = await browser.newContext({
+          |                     ^
+      167 |       geolocation: locations.center,
+      168 |       permissions: ['geolocation'],
+      169 |     });
+        at /Users/jm/Documents/policenthief/tests/game-simulation.spec.ts:166:21
+
+
+[1A[2K  2 failed
+    [chromium] › tests/game-simulation.spec.ts:32:7 › 경찰과 도둑 게임 시뮬레이션 › 🎮 전체 게임 플로우 테스트 ───────────
+    [chromium] › tests/game-simulation.spec.ts:162:7 › 경찰과 도둑 게임 시뮬레이션 › 🔍 빠른 연결 테스트 ──────────────

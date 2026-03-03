@@ -2,6 +2,7 @@
 
 import { useState, useEffect, use, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { Copy, Share2, MessageCircle } from "lucide-react";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import PlayerList from "@/components/PlayerList";
@@ -69,6 +70,53 @@ export default function RoomPage({ params }: { params: Promise<{ code: string }>
     if (success) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  // 카카오톡 공유
+  const handleShareKakao = () => {
+    const link = generateInviteLink(code);
+    const text = `🎮 경찰과 도둑 게임에 초대합니다!\n\n방 이름: ${currentRoom?.name}\n방 코드: ${code.toUpperCase()}\n\n아래 링크를 눌러 참여하세요:`;
+    
+    // 카카오톡 공유 (모바일에서만 작동)
+    const kakaoUrl = `kakaotalk://send?text=${encodeURIComponent(text + '\n' + link)}`;
+    window.location.href = kakaoUrl;
+    
+    // 2초 후에도 페이지 안 넘어가면 링크 복사
+    setTimeout(() => {
+      handleCopyInviteLink();
+    }, 2000);
+  };
+
+  // 문자 공유
+  const handleShareSMS = () => {
+    const link = generateInviteLink(code);
+    const text = `🎮 경찰과 도둑 게임 초대\n\n방: ${currentRoom?.name}\n코드: ${code.toUpperCase()}\n\n링크: ${link}`;
+    
+    const smsUrl = `sms:?body=${encodeURIComponent(text)}`;
+    window.location.href = smsUrl;
+  };
+
+  // Web Share API (모바일)
+  const handleShare = async () => {
+    const link = generateInviteLink(code);
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: '경찰과 도둑 게임 초대',
+          text: `🎮 ${currentRoom?.name} 방에 초대합니다! 코드: ${code.toUpperCase()}`,
+          url: link,
+        });
+      } catch (error) {
+        // 취소하면 링크 복사
+        if ((error as Error).name !== 'AbortError') {
+          handleCopyInviteLink();
+        }
+      }
+    } else {
+      // Web Share API 미지원 시 복사
+      handleCopyInviteLink();
     }
   };
 
@@ -151,20 +199,54 @@ export default function RoomPage({ params }: { params: Promise<{ code: string }>
   return (
     <main className="min-h-screen bg-gray-50 p-4 safe-area-top safe-area-bottom">
       {/* 헤더 */}
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <h1 className="text-xl font-bold text-gray-900">{currentRoom.name}</h1>
-          <p className="text-gray-600 text-sm">
-            방 코드: <span className="font-mono text-blue-600 font-semibold">{code.toUpperCase()}</span>
-          </p>
+      <div className="mb-4">
+        <div className="flex items-center justify-between mb-3">
+          <div>
+            <h1 className="text-xl font-bold text-gray-900">{currentRoom.name}</h1>
+            <p className="text-gray-600 text-sm">
+              방 코드: <span className="font-mono text-blue-600 font-semibold">{code.toUpperCase()}</span>
+            </p>
+          </div>
         </div>
-        <Button
-          variant={copied ? "primary" : "outline"}
-          size="sm"
-          onClick={handleCopyInviteLink}
-        >
-          {copied ? "✓ 복사됨!" : "📋 초대 링크"}
-        </Button>
+
+        {/* 초대하기 섹션 */}
+        <Card padding="sm" className="bg-blue-50 border-blue-200">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Share2 className="w-5 h-5 text-blue-600" />
+              <span className="text-sm font-semibold text-blue-900">친구 초대하기</span>
+            </div>
+            <div className="flex gap-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleShare}
+                className="!py-2"
+              >
+                <Share2 className="w-4 h-4 mr-1" />
+                공유
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleShareKakao}
+                className="!py-2 !text-yellow-700 hover:!bg-yellow-100"
+              >
+                <MessageCircle className="w-4 h-4 mr-1" />
+                카톡
+              </Button>
+              <Button
+                variant={copied ? "primary" : "ghost"}
+                size="sm"
+                onClick={handleCopyInviteLink}
+                className="!py-2"
+              >
+                <Copy className="w-4 h-4 mr-1" />
+                {copied ? "복사됨!" : "링크"}
+              </Button>
+            </div>
+          </div>
+        </Card>
       </div>
 
       {/* 위치 오류 경고 */}

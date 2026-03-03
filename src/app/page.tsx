@@ -30,12 +30,22 @@ export default function Home() {
   const [viewMode, setViewMode] = useState<"list" | "map">("list");
   const [searchRadius, setSearchRadius] = useState(5000);
 
-  // 사용자 ID 초기화
+  // 사용자 ID 초기화 + 초대 링크 처리
   useEffect(() => {
     if (!userId) {
       setUserId(`user_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`);
     }
     cleanupExpiredRooms();
+
+    // URL에서 초대 코드 확인
+    const params = new URLSearchParams(window.location.search);
+    const joinCode = params.get('join');
+    if (joinCode) {
+      setRoomCode(joinCode.toUpperCase());
+      setShowJoinInput(true);
+      // URL 정리
+      window.history.replaceState({}, '', '/');
+    }
   }, [userId, setUserId]);
 
   // 주변 방 검색
