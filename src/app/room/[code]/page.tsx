@@ -38,16 +38,22 @@ export default function RoomPage({ params }: { params: Promise<{ code: string }>
     }
   }, [location, setCurrentLocation]);
 
-  // 방 초기 로드
+  // 방 초기 로드 (한 번만)
   useEffect(() => {
+    let mounted = true;
+    
     if (!currentRoom) {
       findRoomByCode(code).then((room) => {
-        if (room) {
+        if (room && mounted) {
           setCurrentRoom(room);
         }
       });
     }
-  }, [code, currentRoom, setCurrentRoom]);
+
+    return () => {
+      mounted = false;
+    };
+  }, [code]); // currentRoom 의존성 제거
 
   // 방 실시간 구독 (별도 effect)
   useEffect(() => {
