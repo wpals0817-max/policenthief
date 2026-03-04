@@ -125,44 +125,44 @@ export default function ResultPage({ params }: { params: Promise<{ code: string 
   };
 
   return (
-    <main className="min-h-screen p-4 safe-area-top safe-area-bottom">
+    <main className="min-h-screen p-4 safe-area-top safe-area-bottom bg-gray-50">
       {/* 결과 헤더 */}
       <div className={`text-center py-8 rounded-2xl mb-6 ${
-        winner === "police" ? "bg-police-900/50" : "bg-thief-900/50"
+        winner === "police" ? "bg-police-100 border-2 border-police-300" : "bg-thief-100 border-2 border-thief-300"
       }`}>
         <div className="text-6xl mb-4">
           {winner === "police" ? "🚔" : "🏃"}
         </div>
-        <h1 className="text-3xl font-bold text-white mb-2">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">
           {winner === "police" ? "경찰 팀 승리!" : "도둑 팀 승리!"}
         </h1>
-        <p className={`text-lg ${isWinner ? "text-green-400" : "text-red-400"}`}>
+        <p className={`text-lg ${isWinner ? "text-green-600" : "text-red-600"}`}>
           {isWinner ? "🎉 축하합니다! 승리했습니다!" : "😢 아쉽게 패배했습니다"}
         </p>
       </div>
 
       {/* 내 기록 */}
       <Card variant="default" padding="lg" className="mb-4">
-        <h2 className="text-lg font-semibold text-white mb-4">📊 나의 기록</h2>
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">📊 나의 기록</h2>
 
         <div className="grid grid-cols-2 gap-4">
-          <div className="text-center p-4 bg-gray-800/50 rounded-xl">
-            <p className="text-gray-400 text-sm mb-1">뛴 거리</p>
-            <p className="text-2xl font-bold text-blue-400">{formatDistance(totalDistance)}</p>
+          <div className="text-center p-4 bg-gray-50 rounded-xl border border-gray-200">
+            <p className="text-gray-600 text-sm mb-1">뛴 거리</p>
+            <p className="text-2xl font-bold text-blue-600">{formatDistance(totalDistance)}</p>
           </div>
-          <div className="text-center p-4 bg-gray-800/50 rounded-xl">
-            <p className="text-gray-400 text-sm mb-1">평균 속도</p>
-            <p className="text-2xl font-bold text-green-400">{formatSpeed(avgSpeed)}</p>
+          <div className="text-center p-4 bg-gray-50 rounded-xl border border-gray-200">
+            <p className="text-gray-600 text-sm mb-1">평균 속도</p>
+            <p className="text-2xl font-bold text-green-600">{formatSpeed(avgSpeed)}</p>
           </div>
-          <div className="text-center p-4 bg-gray-800/50 rounded-xl">
-            <p className="text-gray-400 text-sm mb-1">플레이 시간</p>
-            <p className="text-2xl font-bold text-yellow-400">{minutes}:{seconds.toString().padStart(2, "0")}</p>
+          <div className="text-center p-4 bg-gray-50 rounded-xl border border-gray-200">
+            <p className="text-gray-600 text-sm mb-1">플레이 시간</p>
+            <p className="text-2xl font-bold text-yellow-600">{minutes}:{seconds.toString().padStart(2, "0")}</p>
           </div>
-          <div className="text-center p-4 bg-gray-800/50 rounded-xl">
-            <p className="text-gray-400 text-sm mb-1">
+          <div className="text-center p-4 bg-gray-50 rounded-xl border border-gray-200">
+            <p className="text-gray-600 text-sm mb-1">
               {currentPlayer?.team === "police" ? "체포 수" : "구출 수"}
             </p>
-            <p className="text-2xl font-bold text-purple-400">
+            <p className="text-2xl font-bold text-purple-600">
               {currentPlayer?.team === "police" ? currentPlayer?.catches || 0 : currentPlayer?.rescues || 0}
             </p>
           </div>
@@ -172,8 +172,8 @@ export default function ResultPage({ params }: { params: Promise<{ code: string 
       {/* 이동 경로 */}
       {currentRoom.centerLocation && locationHistory.length > 1 && (
         <Card variant="default" padding="none" className="mb-4 overflow-hidden">
-          <div className="p-4 border-b border-gray-800">
-            <h2 className="text-lg font-semibold text-white">🗺️ 이동 경로</h2>
+          <div className="p-4 border-b border-gray-200">
+            <h2 className="text-lg font-semibold text-gray-900">🗺️ 이동 경로</h2>
           </div>
           <div className="h-64">
             <GameMap
@@ -189,31 +189,31 @@ export default function ResultPage({ params }: { params: Promise<{ code: string 
 
       {/* 게임 통계 */}
       <Card variant="default" padding="lg" className="mb-4">
-        <h2 className="text-lg font-semibold text-white mb-4">📈 게임 통계</h2>
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">📈 게임 통계</h2>
 
         <div className="grid grid-cols-3 gap-4 text-center">
           <div>
-            <p className="text-gray-400 text-sm mb-1">총 체포</p>
-            <p className="text-xl font-bold text-police-400">{totalCatches}</p>
+            <p className="text-gray-600 text-sm mb-1">총 체포</p>
+            <p className="text-xl font-bold text-police-600">{totalCatches}</p>
           </div>
           <div>
-            <p className="text-gray-400 text-sm mb-1">총 구출</p>
-            <p className="text-xl font-bold text-thief-400">{totalRescues}</p>
+            <p className="text-gray-600 text-sm mb-1">총 구출</p>
+            <p className="text-xl font-bold text-thief-600">{totalRescues}</p>
           </div>
           <div>
-            <p className="text-gray-400 text-sm mb-1">생존 도둑</p>
-            <p className="text-xl font-bold text-green-400">{survivedThieves}</p>
+            <p className="text-gray-600 text-sm mb-1">생존 도둑</p>
+            <p className="text-xl font-bold text-green-600">{survivedThieves}</p>
           </div>
         </div>
       </Card>
 
       {/* 최종 순위 */}
       <Card variant="default" padding="lg" className="mb-4">
-        <h2 className="text-lg font-semibold text-white mb-4">🏆 참가자</h2>
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">🏆 참가자</h2>
 
         <div className="space-y-3">
           <div>
-            <h3 className="text-police-400 font-medium mb-2">경찰 팀</h3>
+            <h3 className="text-police-600 font-medium mb-2">경찰 팀</h3>
             <PlayerList
               players={policeStats.sort((a, b) => (b.catches || 0) - (a.catches || 0))}
               currentUserId={userId || undefined}
@@ -222,10 +222,10 @@ export default function ResultPage({ params }: { params: Promise<{ code: string 
             />
           </div>
 
-          <div className="h-px bg-gray-800" />
+          <div className="h-px bg-gray-200" />
 
           <div>
-            <h3 className="text-thief-400 font-medium mb-2">도둑 팀</h3>
+            <h3 className="text-thief-600 font-medium mb-2">도둑 팀</h3>
             <PlayerList
               players={thiefStats.sort((a, b) => {
                 if (a.status === "alive" && b.status !== "alive") return -1;

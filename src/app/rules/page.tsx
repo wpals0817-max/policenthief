@@ -236,13 +236,13 @@ export default function RulesPage() {
   const currentCategory = RULES[activeCategory];
 
   return (
-    <main className="min-h-screen p-4 safe-area-top safe-area-bottom">
+    <main className="min-h-screen p-4 safe-area-top safe-area-bottom bg-gray-50">
       {/* 헤더 */}
       <div className="flex items-center mb-6">
         <Button variant="ghost" onClick={() => router.back()}>
           ← 뒤로
         </Button>
-        <h1 className="text-2xl font-bold text-white ml-2">📖 게임 룰북</h1>
+        <h1 className="text-2xl font-bold text-gray-900 ml-2">📖 게임 룰북</h1>
       </div>
 
       {/* 카테고리 탭 */}
@@ -254,7 +254,7 @@ export default function RulesPage() {
             className={`px-4 py-2 rounded-xl whitespace-nowrap transition-all ${
               activeCategory === key
                 ? "bg-blue-600 text-white"
-                : "bg-gray-800 text-gray-400 hover:bg-gray-700"
+                : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-300"
             }`}
           >
             {emoji} {title}
@@ -279,8 +279,8 @@ export default function RulesPage() {
             >
               <span className="text-2xl">{rule.emoji}</span>
               <div className="flex-1">
-                <h3 className="font-semibold text-white">{rule.title}</h3>
-                <p className="text-gray-400 text-sm mt-1">{rule.description}</p>
+                <h3 className="font-semibold text-gray-900">{rule.title}</h3>
+                <p className="text-gray-600 text-sm mt-1">{rule.description}</p>
               </div>
               {rule.details && (
                 <span
@@ -298,8 +298,8 @@ export default function RulesPage() {
               <div className="px-4 pb-4 ml-11">
                 <ul className="space-y-2">
                   {rule.details.map((detail, i) => (
-                    <li key={i} className="text-gray-300 text-sm flex items-start gap-2">
-                      <span className="text-blue-400">•</span>
+                    <li key={i} className="text-gray-700 text-sm flex items-start gap-2">
+                      <span className="text-blue-600">•</span>
                       {detail}
                     </li>
                   ))}
@@ -312,27 +312,27 @@ export default function RulesPage() {
 
       {/* 빠른 시작 가이드 */}
       <Card variant="default" padding="lg" className="mt-6">
-        <h2 className="text-lg font-semibold text-white mb-4">🚀 빠른 시작</h2>
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">🚀 빠른 시작</h2>
         <ol className="space-y-3">
-          <li className="flex items-start gap-3 text-gray-300">
+          <li className="flex items-start gap-3 text-gray-700">
             <span className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
               1
             </span>
             <span>방을 만들거나 초대 링크로 참여하세요</span>
           </li>
-          <li className="flex items-start gap-3 text-gray-300">
+          <li className="flex items-start gap-3 text-gray-700">
             <span className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
               2
             </span>
             <span>게임 설정을 확인하고 대기실에서 모이세요</span>
           </li>
-          <li className="flex items-start gap-3 text-gray-300">
+          <li className="flex items-start gap-3 text-gray-700">
             <span className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
               3
             </span>
             <span>방장이 게임을 시작하면 팀이 배정됩니다</span>
           </li>
-          <li className="flex items-start gap-3 text-gray-300">
+          <li className="flex items-start gap-3 text-gray-700">
             <span className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
               4
             </span>
